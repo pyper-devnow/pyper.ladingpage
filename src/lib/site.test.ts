@@ -1,5 +1,3 @@
-import { readFileSync } from "node:fs";
-import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import {
   autoImplementation,
@@ -25,29 +23,22 @@ describe("Pyper landing content", () => {
     );
   });
 
-  it("keeps the SEO offer and canonical metadata aligned", () => {
+  it("keeps the SEO and canonical metadata aligned", () => {
     expect(hero.title).toBe(
       "CRM com IA e WhatsApp para automatizar vendas.",
     );
     expect(siteMetadata.title).toBe(
-      "Pyper | CRM com IA, WhatsApp e Automação Comercial",
+      "Pyper | CRM com WhatsApp, Inteligência Artificial e Automação",
     );
-    expect(siteMetadata.description).toContain("CRM, agentes de IA, WhatsApp");
+    expect(siteMetadata.description).toContain(
+      "CRM integrado com WhatsApp e Inteligência Artificial",
+    );
     expect(siteConfig.url).toBe("https://pyper.com.br");
     expect(siteConfig.logo.src).toBe("/logo-pyper-wordmark.png");
     expect(siteConfig.logo.schemaSrc).toBe("/logo-pyper-official.png");
-    expect(heroDashboard.src).toBe("/hero-dashboard-pyper.svg");
+    expect(heroDashboard.src).toBe("/dashboard-crm-pyper.png");
     expect(heroDashboard.width).toBeGreaterThanOrEqual(1800);
-  });
-
-  it("keeps the hero dashboard SVG with explicit intrinsic dimensions", () => {
-    const svg = readFileSync(
-      join(process.cwd(), "public", "hero-dashboard-pyper.svg"),
-      "utf8",
-    );
-
-    expect(svg.split("\n")[0]).toContain('width="1800"');
-    expect(svg.split("\n")[0]).toContain('height="1040"');
+    expect(heroDashboard.height).toBeGreaterThanOrEqual(1040);
   });
 
   it("exposes FAQ and structured data for search engines", () => {
@@ -73,8 +64,8 @@ describe("Pyper landing content", () => {
     );
     expect(workspaceTemplates.map((template) => template.title)).toEqual([
       "Vendas",
-      "Tarefas",
-      "Logística",
+      "Atendimento",
+      "Pós-venda",
     ]);
   });
 

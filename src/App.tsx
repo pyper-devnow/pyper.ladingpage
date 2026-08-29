@@ -1,5 +1,5 @@
 
-import React, { ReactNode, useState, useEffect, useRef } from "react";
+import { ReactNode, useState, useEffect } from "react";
 import { KanbanWorkspaceClient } from "./components/KanbanWorkspaceClient";
 import {
   ArrowRight,
@@ -25,7 +25,6 @@ import {
   Smile,
   Split,
   ShoppingCart,
-  Truck,
   User,
   Filter,
   BookOpen,
@@ -403,7 +402,7 @@ function InteligenciaDadosSection() {
                 <ShieldCheck size={20} />
               </span>
               <div>
-                <h4>Serasa Experian</h4>
+                <h3>Serasa Experian</h3>
                 <p>Score de crédito e saúde financeira em tempo real.</p>
               </div>
             </div>
@@ -412,7 +411,7 @@ function InteligenciaDadosSection() {
                 <Scale size={20} />
               </span>
               <div>
-                <h4>JusBrasil</h4>
+                <h3>JusBrasil</h3>
                 <p>Monitoramento de processos e histórico jurídico.</p>
               </div>
             </div>
@@ -552,155 +551,6 @@ function FeaturesDashboardSection() {
 }
 
 
-function MascotFollower() {
-  const whatsappUrl = buildWhatsAppUrl(
-    "Olá! Vi o mascote da Pyper e quero aproveitar a oferta especial com termos e condições exclusivos! 🎉"
-  );
-  const [pos, setPos] = useState({ x: -200, y: 300 });
-  const [modalOpen, setModalOpen] = useState(false);
-  const [countdown, setCountdown] = useState(10);
-
-  const targetRef = useRef({ x: typeof window !== "undefined" ? window.innerWidth / 2 : 400, y: 300 });
-  const currentRef = useRef({ x: -200, y: 300 });
-  const rafRef = useRef<number>(0);
-  const prevRef = useRef({ x: -200, y: 300 });
-  const rotRef = useRef(0);
-
-  useEffect(() => {
-    const onMouseMove = (e: MouseEvent) => {
-      targetRef.current = { x: e.clientX, y: e.clientY };
-    };
-    const onTouch = (e: TouchEvent) => {
-      const t = e.touches[0];
-      if (t) targetRef.current = { x: t.clientX, y: t.clientY };
-    };
-    window.addEventListener("mousemove", onMouseMove);
-    window.addEventListener("touchstart", onTouch, { passive: true });
-    window.addEventListener("touchmove", onTouch, { passive: true });
-
-    const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
-    const animate = () => {
-      const speed = 0.018;
-      currentRef.current.x = lerp(currentRef.current.x, targetRef.current.x, speed);
-      currentRef.current.y = lerp(currentRef.current.y, targetRef.current.y, speed);
-
-      const dx = currentRef.current.x - prevRef.current.x;
-      const targetRot = Math.max(-20, Math.min(20, dx * 3));
-      rotRef.current = lerp(rotRef.current, targetRot, 0.1);
-
-      prevRef.current = { ...currentRef.current };
-      setPos({ x: Math.round(currentRef.current.x), y: Math.round(currentRef.current.y) });
-      rafRef.current = requestAnimationFrame(animate);
-    };
-    rafRef.current = requestAnimationFrame(animate);
-
-    return () => {
-      window.removeEventListener("mousemove", onMouseMove);
-      window.removeEventListener("touchstart", onTouch);
-      window.removeEventListener("touchmove", onTouch);
-      cancelAnimationFrame(rafRef.current);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (!modalOpen) { setCountdown(10); return; }
-    setCountdown(10);
-    const interval = setInterval(() => {
-      setCountdown((prev) => {
-        if (prev <= 1) { clearInterval(interval); setModalOpen(false); return 10; }
-        return prev - 1;
-      });
-    }, 1000);
-    return () => clearInterval(interval);
-  }, [modalOpen]);
-
-  const handleMascotClick = (e: React.MouseEvent | React.TouchEvent) => {
-    e.stopPropagation();
-    setModalOpen(true);
-  };
-
-  const urgencyColor = countdown <= 3 ? "#d64040" : countdown <= 6 ? "#b66b00" : "#006d3d";
-
-  return (
-    <>
-      {/* Floating Mascot */}
-      <div
-        className="mascot-follower"
-        style={{
-          transform: `translate(${pos.x - 35}px, ${pos.y - 35}px) rotate(${rotRef.current}deg)`,
-        }}
-        onClick={handleMascotClick}
-        onTouchEnd={(e) => { e.preventDefault(); handleMascotClick(e); }}
-        role="button"
-        aria-label="Clique no mascote para uma oferta especial"
-        tabIndex={0}
-      >
-        <img src="/pyper.png" alt="Mascote Pyper" className="mascot-img" draggable={false} />
-        <span className="mascot-hint">Clique em mim! 👆</span>
-      </div>
-
-      {/* Modal */}
-      {modalOpen && (
-        <div
-          className="mascot-modal-overlay"
-          onClick={() => setModalOpen(false)}
-          role="dialog"
-          aria-modal="true"
-          aria-label="Oferta especial"
-        >
-          <div className="mascot-modal" onClick={(e) => e.stopPropagation()}>
-            <button
-              className="mascot-modal-close"
-              onClick={() => setModalOpen(false)}
-              aria-label="Fechar"
-            >
-              ×
-            </button>
-
-            <div className="mascot-modal-avatar">
-              <img src="/pyper.png" alt="Mascote Pyper" />
-            </div>
-
-            <div
-              className="mascot-countdown-ring"
-              style={{ "--countdown-color": urgencyColor } as React.CSSProperties}
-            >
-              <span className="countdown-number" style={{ color: urgencyColor }}>
-                {countdown}
-              </span>
-            </div>
-
-            <h3 className="mascot-modal-title">🎉 Parabéns, você foi escolhido!</h3>
-            <p className="mascot-modal-body">
-              Você tem{" "}
-              <strong style={{ color: urgencyColor }}>{countdown} segundo{countdown !== 1 ? "s" : ""}</strong>{" "}
-              para falar com nossos especialistas e garantir{" "}
-              <strong>termos e condições exclusivos</strong> para sua empresa!
-            </p>
-            <p className="mascot-modal-sub">
-              ⚡ Oferta válida apenas por essa sessão. Não perca!
-            </p>
-
-            <a
-              href={whatsappUrl}
-              className="button button-primary mascot-cta-btn"
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => setModalOpen(false)}
-            >
-              💬 Falar com Especialista Agora
-            </a>
-
-            <p className="mascot-modal-terms">
-              Ao clicar, você será direcionado ao WhatsApp da nossa equipe.
-            </p>
-          </div>
-        </div>
-      )}
-    </>
-  );
-}
-
 export default function Home() {
   const whatsappUrl = buildWhatsAppUrl();
   const jsonLd = JSON.stringify(jsonLdGraph).replace(/</g, "\\u003c");
@@ -745,19 +595,19 @@ export default function Home() {
       </header>
 
       <nav className="mobile-dock" aria-label="Navegação mobile">
-        <a href="#inicio" aria-label="Início">
+        <a href="#inicio">
           <HomeIcon size={20} aria-hidden="true" />
           Início
         </a>
-        <a href="#solucoes" aria-label="Recursos">
+        <a href="#solucoes">
           <Workflow size={20} aria-hidden="true" />
           Recursos
         </a>
-        <a href="#faq" aria-label="Perguntas frequentes">
+        <a href="#faq">
           <CreditCard size={20} aria-hidden="true" />
           FAQ
         </a>
-        <a href={whatsappUrl} aria-label="WhatsApp">
+        <a href={whatsappUrl}>
           <MessageCircle size={20} aria-hidden="true" />
           WhatsApp
         </a>
@@ -869,7 +719,7 @@ export default function Home() {
 
               <div className="cta-row">
                 <a className="button button-primary" href={whatsappUrl}>
-                  Agendar demonstração
+                  Começar Agora
                   <ArrowRight size={18} aria-hidden="true" />
                 </a>
                 <a className="button button-secondary" href="#solucoes">
@@ -915,6 +765,18 @@ export default function Home() {
 
         <FeaturesDashboardSection />
 
+        <section className="section auto-implementation" id="auto-implantacao">
+          <div className="site-shell auto-implementation-layout">
+            <div className="auto-implementation-copy">
+              <p className="feature-pill">{autoImplementation.kicker}</p>
+              <h2>{autoImplementation.title}</h2>
+              <p>{autoImplementation.description}</p>
+            </div>
+
+            <WorkspaceBuilderMockup />
+          </div>
+        </section>
+
         <section className="section section-muted">
           <div className="site-shell">
             <div className="section-heading">
@@ -945,18 +807,6 @@ export default function Home() {
                 );
               })}
             </div>
-          </div>
-        </section>
-
-        <section className="section auto-implementation" id="auto-implantacao">
-          <div className="site-shell auto-implementation-layout">
-            <div className="auto-implementation-copy">
-              <p className="feature-pill">{autoImplementation.kicker}</p>
-              <h2>{autoImplementation.title}</h2>
-              <p>{autoImplementation.description}</p>
-            </div>
-
-            <WorkspaceBuilderMockup />
           </div>
         </section>
 
@@ -1074,16 +924,17 @@ export default function Home() {
                 seu CRM e seus processos em um só lugar?
               </h2>
               <p>
-                Fale pelo WhatsApp e agende uma conversa para entender como a
-                Pyper pode entrar na sua operação comercial.
+                Fale com a gente pelo WhatsApp e veja como a Pyper entra na sua
+                operação comercial.
               </p>
               <div className="cta-row centered">
                 <a className="button button-primary" href={whatsappUrl}>
-                  Criar minha conta grátis
+                  Começar Agora
+                  <ArrowRight size={18} aria-hidden="true" />
                 </a>
-                <a className="button button-secondary" href={whatsappUrl}>
-                  Falar com consultor
-                  <Send size={18} aria-hidden="true" />
+                <a className="button button-secondary" href="#solucoes">
+                  <LayoutGrid size={18} aria-hidden="true" />
+                  Ver como funciona
                 </a>
               </div>
             </div>
@@ -1129,16 +980,14 @@ export default function Home() {
       >
         <MessageCircle size={24} aria-hidden="true" />
       </a>
-
-      <MascotFollower />
     </>
   );
 }
 
 const workspaceIconMap = {
   cart: ShoppingCart,
-  logistics: Truck,
-  tasks: CheckSquare,
+  support: MessageCircle,
+  followup: BellRing,
 } satisfies Record<string, LucideIcon>;
 
 const workspaceStatIconMap = {
@@ -1295,7 +1144,7 @@ function WhatsAppWorkspace() {
                   <small>{contact.time}</small>
                 </div>
                 <p>{contact.preview}</p>
-                <div className="contact-agent" style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '9px', fontWeight: 'bold', color: 'var(--brand-green)', marginTop: '4px' }}>
+                <div className="contact-agent" style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '9px', fontWeight: 'bold', color: 'var(--primary)', marginTop: '4px' }}>
                   <User size={10} /> PYPER AI
                 </div>
               </div>
@@ -1312,7 +1161,7 @@ function WhatsAppWorkspace() {
             <div>
               <strong>Mariana Silva | TechStore</strong>
               <p style={{ display: 'flex', alignItems: 'center', gap: '6px', flexWrap: 'wrap' }}>
-                <span style={{ color: 'var(--whatsapp)' }}>● Online</span> · 558588006464
+                <span style={{ color: 'var(--primary)' }}>● Online</span> · 558588006464
                 <span style={{ color: '#047857', background: '#d1fae5', padding: '2px 6px', borderRadius: '4px', fontSize: '10px', fontWeight: 'bold', marginLeft: '6px', display: 'inline-flex', alignItems: 'center' }}>
                   <Bot size={10} style={{ marginRight: '4px' }}/>🤖 PYPER AI
                 </span>

@@ -18,12 +18,19 @@ export function buildWhatsAppUrl(message: string = siteConfig.whatsappMessage) {
   return `https://wa.me/${siteConfig.whatsappPhone}?text=${encodeURIComponent(message)}`;
 }
 
+// Analytics. Vazio = desligado (os eventos de funil continuam indo pro Clarity,
+// que já está no index.html). Preencha um dos dois para ligar GA4 ou Plausible.
+export const analytics = {
+  ga4Id: "", // ex: "G-XXXXXXXXXX"
+  plausibleDomain: "", // ex: "pyper.com.br"
+} as const;
+
 export const hero = {
   eyebrow: "CRM, WhatsApp e IA em uma operação só",
   title: "CRM com IA e WhatsApp para automatizar vendas.",
   subtitle:
     "Centralize conversas, organize leads e coloque agentes de IA trabalhando com sua equipe.",
-  primaryCta: "Agendar demonstração",
+  primaryCta: "Começar Agora",
   secondaryCta: "Ver como funciona",
 } as const;
 
@@ -63,9 +70,9 @@ export const siteMetadata = {
 };
 
 export const metrics = [
-  { value: "1 tela", label: "para conversas, leads e funil" },
-  { value: "24/7", label: "com agentes de IA treinados" },
-  { value: "Automatize", label: "menos planilhas e retrabalho" },
+  { value: "1 tela", label: "conversas, leads e funil no mesmo lugar" },
+  { value: "24/7", label: "agente de IA atende e qualifica na hora" },
+  { value: "Sem código", label: "monte funil e automações arrastando" },
 ] as const;
 
 export const painPoints = [
@@ -96,7 +103,7 @@ export const autoImplementation = {
   workspaceSubtitle:
     "Escolha um modelo e seu workspace já vem com pipeline, dashboard e automações prontos — sem partir de uma tela em branco.",
   blankWorkspace: {
-    title: "Projeto em branco",
+    title: "Em branco",
     description:
       "Comece do zero e configure tudo manualmente. Para usuários avançados.",
     action: "Criar vazio",
@@ -131,17 +138,17 @@ export const workspaceTemplates = [
     ],
   },
   {
-    icon: "tasks",
+    icon: "support",
     tone: "green",
-    title: "Tarefas",
+    title: "Atendimento",
     description:
-      "Board kanban para gestão de tarefas com backlog, acompanhamento de progresso e revisões.",
+      "Fila de conversas do WhatsApp com triagem, acompanhamento de SLA e encerramento por etapa.",
     tags: [
-      { label: "Backlog", tone: "gray" },
-      { label: "A Fazer", tone: "blue" },
-      { label: "Em Andamento", tone: "amber" },
-      { label: "Em Revisão", tone: "purple" },
-      { label: "Concluído", tone: "green" },
+      { label: "Novo", tone: "blue" },
+      { label: "Em Atendimento", tone: "amber" },
+      { label: "Aguardando Cliente", tone: "purple" },
+      { label: "Escalado", tone: "red" },
+      { label: "Resolvido", tone: "green" },
     ],
     stats: [
       { value: "5", label: "estágios", icon: "pipeline" },
@@ -150,21 +157,20 @@ export const workspaceTemplates = [
     ],
   },
   {
-    icon: "logistics",
+    icon: "followup",
     tone: "green",
-    title: "Logística",
+    title: "Pós-venda",
     description:
-      "Pipeline de fulfillment de pedidos do recebimento até entrega e devoluções.",
+      "Acompanhe cada cliente do fechamento ao onboarding, renovação e reativação.",
     tags: [
-      { label: "Pedido Recebido", tone: "blue" },
-      { label: "Separação", tone: "purple" },
-      { label: "Embalagem", tone: "purple" },
-      { label: "Expedido", tone: "amber" },
-      { label: "Entregue", tone: "green" },
-      { label: "Devolvido", tone: "red" },
+      { label: "Contrato Fechado", tone: "green" },
+      { label: "Onboarding", tone: "blue" },
+      { label: "Cliente Ativo", tone: "green" },
+      { label: "Renovação", tone: "amber" },
+      { label: "Em Risco", tone: "red" },
     ],
     stats: [
-      { value: "6", label: "estágios", icon: "pipeline" },
+      { value: "5", label: "estágios", icon: "pipeline" },
       { value: "4", label: "widgets", icon: "widgets" },
       { value: "3", label: "automações", icon: "automation" },
     ],

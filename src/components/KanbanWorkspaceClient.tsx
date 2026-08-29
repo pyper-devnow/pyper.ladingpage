@@ -143,10 +143,9 @@ export function KanbanWorkspaceClient({
                       background: 'var(--surface-low)',
                       borderRadius: '4px',
                       fontSize: '10px',
-                      color: 'var(--brand-green)',
+                      color: 'var(--primary)',
                       fontWeight: 'bold',
-                      textAlign: 'center',
-                      opacity: 0.8
+                      textAlign: 'center'
                     }}>
                       Clique para ver detalhes
                     </div>

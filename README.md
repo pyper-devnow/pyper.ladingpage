@@ -1,36 +1,42 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Pyper landing
 
-## Getting Started
+Landing page da Pyper (CRM com WhatsApp, IA e automação comercial). Página única em
+React + Vite, publicada em https://pyper.com.br.
 
-First, run the development server:
+## Stack
+
+- React 19 + Vite 6
+- TypeScript
+- Tailwind CSS v4 (via `@tailwindcss/postcss`)
+- Fontes self-hosted (`@fontsource/geist-sans`, `@fontsource/geist-mono`)
+- `lucide-react` para ícones
+- Vitest para os testes de conteúdo
+
+## Scripts
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run dev       # servidor de desenvolvimento (Vite)
+npm run build     # tsc + build de produção em dist/
+npm run preview   # serve o build de produção localmente
+npm run lint      # ESLint
+npm run test      # Vitest (vitest run)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Estrutura
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- `index.html`: shell da página, meta tags de SEO/OG e o snippet do Microsoft Clarity
+- `src/main.tsx`: ponto de entrada, monta `<App />`
+- `src/App.tsx`: a página inteira (todas as seções e os mockups de UI)
+- `src/lib/site.ts`: todo o conteúdo textual e os dados estruturados (hero, FAQ, JSON-LD...). Editar copy aqui, não no JSX
+- `src/lib/site.test.ts`: testes que travam o conteúdo aprovado
+- `src/components/KanbanWorkspaceClient.tsx`: mockup do quadro kanban
+- `src/globals.css`: todos os estilos, com os tokens de tema no `:root`
+- `public/`: imagens, `robots.txt`, `sitemap.xml`
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Deploy
 
-## Learn More
+Build estático em `dist/`, publicado na Vercel.
 
-To learn more about Next.js, take a look at the following resources:
+## Revisão em andamento
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+`docs/REVISAO-LANDING.md` tem o backlog de melhorias priorizado.

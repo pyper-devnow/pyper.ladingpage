@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+/* Tailwind nao deve varrer assets estaticos nem o build commitado */
+@source not "../public";
+@source not "../dist";
+
 :root {
   --background: #f9f9fa;
   --foreground: #1a1c1d;
@@ -13,6 +17,7 @@
   --muted-strong: #3e4a40;
   --primary: #006d3d;
   --brand-green: #69dd96;
+  --brand-green-strong: #05733f;
   --brand-green-soft: #e9fbef;
   --blue: #2563eb;
   --blue-soft: #eaf1ff;
@@ -217,10 +222,10 @@ input {
 }
 
 .button-primary {
-  border-color: var(--brand-green);
-  background: var(--brand-green);
+  border-color: var(--brand-green-strong);
+  background: var(--brand-green-strong);
   color: #ffffff;
-  box-shadow: 0 12px 24px rgb(105 221 150 / 24%);
+  box-shadow: 0 12px 24px rgb(5 115 63 / 22%);
 }
 
 .button-primary:hover {
@@ -440,7 +445,7 @@ input {
 }
 
 .section-title span {
-  color: #7b8580;
+  color: var(--muted);
 }
 
 .section-copy {
@@ -557,7 +562,7 @@ input {
   border-radius: 999px;
   background: var(--brand-green-soft);
   padding: 5px 14px;
-  color: var(--brand-green);
+  color: var(--primary);
   font-size: 12px;
   font-weight: 850;
   line-height: 1;
@@ -821,27 +826,27 @@ input {
 }
 
 .workspace-chip.blue {
-  color: #2f80ed;
+  color: #1d4ed8;
 }
 
 .workspace-chip.green {
-  color: #049452;
+  color: #05733f;
 }
 
 .workspace-chip.purple {
-  color: #8657e7;
+  color: #6d28d9;
 }
 
 .workspace-chip.amber {
-  color: #f59e0b;
+  color: #92400e;
 }
 
 .workspace-chip.red {
-  color: #ef4444;
+  color: #b91c1c;
 }
 
 .workspace-chip.gray {
-  color: #8793a0;
+  color: #475569;
 }
 
 .workspace-template-card footer {
@@ -987,7 +992,7 @@ input {
   border-radius: 8px;
   background: #f8faf9;
   padding: 8px 10px;
-  color: #98a09b;
+  color: var(--muted);
   font-size: 12px;
 }
 
@@ -1099,7 +1104,7 @@ input {
 
 .contact-head small,
 .contact-card p {
-  color: #7b8580;
+  color: var(--muted);
   font-size: 11px;
 }
 
@@ -1313,7 +1318,7 @@ input {
   border-radius: 8px;
   background: rgb(255 255 255 / 78%);
   padding: 6px 10px;
-  color: #7b8580;
+  color: var(--muted);
   font-size: 10px;
   box-shadow: 0 4px 12px rgb(26 28 29 / 5%);
 }
@@ -1352,7 +1357,7 @@ input {
   position: absolute;
   right: 10px;
   bottom: 5px;
-  color: #7b8580;
+  color: var(--muted);
   font-size: 9px;
 }
 
@@ -1370,14 +1375,14 @@ input {
   border-top: 1px solid var(--border);
   background: #f0f2f5;
   padding: 12px 14px;
-  color: #7b8580;
+  color: var(--muted);
 }
 
 .chat-input span {
   border-radius: 10px;
   background: #ffffff;
   padding: 11px 14px;
-  color: #9ba29e;
+  color: var(--muted);
   font-size: 13px;
   box-shadow: 0 2px 8px rgb(26 28 29 / 4%);
 }
@@ -1506,7 +1511,7 @@ input {
 .deal-meta small,
 .deal-meta span,
 .deal-timers {
-  color: #77817b;
+  color: var(--muted);
   font-size: 10px;
   font-weight: 750;
 }
@@ -1675,7 +1680,7 @@ input {
 
 .flow-step p {
   margin: 0;
-  color: #77817b;
+  color: var(--muted);
   font-size: 11px;
 }
 
@@ -1755,7 +1760,7 @@ input {
 }
 
 .benefit-card > svg {
-  color: #9ba29e;
+  color: var(--muted);
 }
 
 .faq-section {
@@ -2034,7 +2039,7 @@ input {
 }
 
 .setup-title span {
-  color: #7b8580;
+  color: var(--muted);
 }
 
 .setup-description {
@@ -2159,13 +2164,13 @@ input {
 .stats-kicker {
   font-size: 11px;
   font-weight: 700;
-  color: #7b8580;
+  color: var(--muted);
 }
 
 .stats-value {
   font-size: 24px;
   font-weight: 850;
-  color: var(--brand-green);
+  color: var(--primary);
   letter-spacing: -0.02em;
 }
 
@@ -2243,7 +2248,7 @@ input {
 
 .board-row.header {
   font-weight: 700;
-  color: #7b8580;
+  color: var(--muted);
   border-bottom: 1px solid var(--border);
 }
 
@@ -2277,7 +2282,7 @@ input {
 .avatar-small.purple { background: #f3e8ff; color: #6b21a8; }
 
 .board-channel-badge {
-  color: #059669;
+  color: #047857;
   font-weight: 600;
   font-size: 10px;
 }
@@ -2298,7 +2303,7 @@ input {
 
 .status-pill.orange {
   background: var(--amber-soft);
-  color: var(--amber);
+  color: #8a4b00;
 }
 
 /* Automation Card / Right Layer */
@@ -2538,7 +2543,7 @@ input {
 }
 
 .prospect-search-icon {
-  color: #98a09b;
+  color: var(--muted);
   flex-shrink: 0;
 }
 
@@ -2767,7 +2772,7 @@ input {
   color: var(--purple);
 }
 
-.integration-mini-card h4 {
+.integration-mini-card h3 {
   margin: 0 0 4px 0;
   font-size: 15px;
   font-weight: 700;
@@ -2870,7 +2875,7 @@ input {
 .data-block-title {
   font-size: 12px;
   font-weight: 800;
-  color: #98a09b;
+  color: var(--muted);
   letter-spacing: 0.05em;
   display: block;
 }
@@ -2884,7 +2889,7 @@ input {
 .data-score-value {
   font-size: 26px;
   font-weight: 850;
-  color: var(--brand-green);
+  color: var(--primary);
   line-height: 1;
 }
 
@@ -2906,7 +2911,7 @@ input {
 
 .data-indicator-label {
   font-size: 11px;
-  color: #7b8580;
+  color: var(--muted);
   font-weight: 500;
 }
 
@@ -2963,7 +2968,7 @@ input {
 }
 
 .data-legal-icon {
-  color: #98a09b;
+  color: var(--muted);
 }
 
 .data-legal-count {
@@ -2997,7 +3002,7 @@ input {
   justify-content: space-between;
   font-size: 10px;
   font-weight: 600;
-  color: #7b8580;
+  color: var(--muted);
 }
 
 /* Floating 3D Check Pill */
@@ -3168,7 +3173,7 @@ input {
 
 @media (max-width: 760px) {
   html {
-    scroll-padding-top: 76px;
+    scroll-padding-top: 88px;
   }
 
   .site-shell {
@@ -3625,231 +3630,68 @@ input {
   }
 }
 
-/* ─── Mascot Follower ─────────────────────────────────────────── */
+/* ─── Consent banner (LGPD) ─────────────────────────────────────── */
 
-@keyframes mascot-float {
-  0%, 100% { transform: translateY(0px) scale(1); }
-  50%       { transform: translateY(-8px) scale(1.04); }
-}
-
-@keyframes mascot-hint-fade {
-  0%   { opacity: 0; transform: translateY(4px); }
-  20%  { opacity: 1; transform: translateY(0); }
-  80%  { opacity: 1; transform: translateY(0); }
-  100% { opacity: 0; transform: translateY(-4px); }
-}
-
-@keyframes countdown-pulse {
-  0%, 100% { transform: scale(1); }
-  50%       { transform: scale(1.12); }
-}
-
-@keyframes modal-in {
-  from { opacity: 0; transform: scale(0.88) translateY(24px); }
-  to   { opacity: 1; transform: scale(1) translateY(0); }
-}
-
-@keyframes overlay-in {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-
-.mascot-follower {
+.consent-banner {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 70px;
-  height: 70px;
-  z-index: 9999;
-  pointer-events: all;
-  cursor: pointer;
-  will-change: transform;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  filter: drop-shadow(0 8px 24px rgba(0, 200, 120, 0.35));
-  transition: filter 0.2s ease;
-}
-
-.mascot-follower:hover {
-  filter: drop-shadow(0 12px 32px rgba(0, 200, 120, 0.6));
-}
-
-.mascot-img {
-  width: 70px;
-  height: 70px;
-  object-fit: contain;
-  animation: mascot-float 3s ease-in-out infinite;
-  user-select: none;
-  -webkit-user-drag: none;
-}
-
-.mascot-hint {
-  position: absolute;
-  top: -28px;
   left: 50%;
+  bottom: 16px;
+  z-index: 90;
   transform: translateX(-50%);
-  background: rgba(0, 0, 0, 0.75);
-  backdrop-filter: blur(8px);
-  color: #fff;
-  font-size: 0.65rem;
-  font-weight: 600;
-  white-space: nowrap;
-  padding: 4px 10px;
-  border-radius: 20px;
-  pointer-events: none;
-  animation: mascot-hint-fade 4s ease-in-out infinite 2s;
-  opacity: 0;
-}
-
-/* ─── Mascot Modal ────────────────────────────────────────────── */
-
-.mascot-modal-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 10000;
-  background: rgba(0, 0, 0, 0.65);
-  backdrop-filter: blur(6px);
+  width: min(100% - 24px, 560px);
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding: 20px;
-  animation: overlay-in 0.2s ease;
+  gap: 16px;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--surface);
+  box-shadow: var(--shadow-md);
 }
 
-.mascot-modal {
-  position: relative;
-  background: #0d0d0d;
-  border: 1px solid rgba(0, 200, 120, 0.25);
-  border-radius: 24px;
-  padding: 40px 36px 32px;
-  max-width: 440px;
-  width: 100%;
-  text-align: center;
-  box-shadow:
-    0 0 0 1px rgba(0, 200, 120, 0.1),
-    0 40px 80px rgba(0, 0, 0, 0.6),
-    0 0 60px rgba(0, 200, 120, 0.08);
-  animation: modal-in 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+.consent-banner p {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.4;
+  color: var(--muted);
 }
 
-.mascot-modal-close {
-  position: absolute;
-  top: 14px;
-  right: 16px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 1.4rem;
-  line-height: 1;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
+.consent-actions {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.consent-btn {
+  min-height: 36px;
+  padding: 8px 14px;
+  border-radius: 9px;
+  border: 1px solid transparent;
+  font-size: 13px;
+  font-weight: 700;
   cursor: pointer;
-  transition: all 0.2s ease;
-}
-.mascot-modal-close:hover {
-  background: rgba(255, 255, 255, 0.12);
-  color: #fff;
 }
 
-.mascot-modal-avatar {
-  width: 80px;
-  height: 80px;
-  margin: 0 auto 16px;
-  border-radius: 50%;
-  overflow: hidden;
-  border: 3px solid rgba(0, 200, 120, 0.4);
-  box-shadow: 0 0 24px rgba(0, 200, 120, 0.3);
-  animation: mascot-float 2.5s ease-in-out infinite;
-}
-.mascot-modal-avatar img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.consent-decline {
+  background: transparent;
+  border-color: var(--border-strong);
+  color: var(--foreground);
 }
 
-.mascot-countdown-ring {
-  width: 72px;
-  height: 72px;
-  margin: 0 auto 20px;
-  border-radius: 50%;
-  border: 3px solid var(--countdown-color, #006d3d);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 0 20px color-mix(in srgb, var(--countdown-color, #006d3d) 40%, transparent);
-  transition: border-color 0.5s ease, box-shadow 0.5s ease;
+.consent-accept {
+  background: var(--brand-green-strong);
+  color: #ffffff;
 }
 
-.countdown-number {
-  font-size: 2rem;
-  font-weight: 800;
-  line-height: 1;
-  animation: countdown-pulse 1s ease-in-out infinite;
-  transition: color 0.5s ease;
-}
-
-.mascot-modal-title {
-  font-size: 1.5rem;
-  font-weight: 800;
-  color: #fff;
-  margin-bottom: 12px;
-  line-height: 1.3;
-}
-
-.mascot-modal-body {
-  font-size: 1rem;
-  color: rgba(255, 255, 255, 0.75);
-  line-height: 1.6;
-  margin-bottom: 8px;
-}
-.mascot-modal-body strong {
-  color: #fff;
-}
-
-.mascot-modal-sub {
-  font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.45);
-  margin-bottom: 24px;
-}
-
-.mascot-cta-btn {
-  width: 100%;
-  justify-content: center;
-  font-size: 1.05rem !important;
-  padding: 16px 24px !important;
-  border-radius: 14px !important;
-  animation: countdown-pulse 1s ease-in-out infinite;
-  box-shadow: 0 8px 32px rgba(0, 200, 120, 0.35) !important;
-}
-
-.mascot-modal-terms {
-  font-size: 0.72rem;
-  color: rgba(255, 255, 255, 0.28);
-  margin-top: 14px;
-  margin-bottom: 0;
-}
-
-/* Mobile adjustments for mascot */
-@media (max-width: 768px) {
-  .mascot-follower {
-    width: 60px;
-    height: 60px;
+@media (max-width: 760px) {
+  .consent-banner {
+    bottom: calc(68px + 12px);
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
   }
-  .mascot-img {
-    width: 60px;
-    height: 60px;
-  }
-  .mascot-modal {
-    padding: 32px 24px 24px;
-    border-radius: 20px;
-  }
-  .mascot-modal-title {
-    font-size: 1.25rem;
+
+  .consent-actions {
+    justify-content: flex-end;
   }
 }
