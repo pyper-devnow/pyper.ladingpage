@@ -1,4 +1,0 @@
-User-Agent: *
-Allow: /
-
-Sitemap: https://pyper.com.br/sitemap.xml
