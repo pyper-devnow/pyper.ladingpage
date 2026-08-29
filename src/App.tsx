@@ -554,6 +554,7 @@ function FeaturesDashboardSection() {
 export default function Home() {
   const whatsappUrl = buildWhatsAppUrl();
   const jsonLd = JSON.stringify(jsonLdGraph).replace(/</g, "\\u003c");
+  const year = new Date().getFullYear();
 
   return (
     <>
@@ -953,7 +954,12 @@ export default function Home() {
               height={siteConfig.logo.height}
             />
             <p>
-              © 2026 {siteConfig.name}. Inteligência Artificial para seu CRM.
+              © {year} {siteConfig.name}. CRM com WhatsApp e IA para automatizar
+              vendas.
+            </p>
+            <p className="footer-legal">
+              {siteConfig.legalName} · CNPJ {siteConfig.cnpj} ·{" "}
+              <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
             </p>
           </div>
           <nav className="footer-links" aria-label="Links finais">
@@ -969,6 +975,8 @@ export default function Home() {
             >
               <Instagram size={14} /> Instagram
             </a>
+            <a href="/termos.html">Termos de Uso</a>
+            <a href="/privacidade.html">Política de Privacidade</a>
           </nav>
         </div>
       </footer>

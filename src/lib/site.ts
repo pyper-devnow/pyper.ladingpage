@@ -1,6 +1,8 @@
 
 export const siteConfig = {
   name: "Pyper",
+  legalName: "Pyper LTDA",
+  cnpj: "67.791.377/0001-87",
   url: "https://pyper.com.br",
   whatsappPhone: "558581086339",
   whatsappMessage: "Olá, quero agendar uma demonstração da Pyper.",
@@ -327,12 +329,16 @@ export const jsonLdGraph = {
       "@type": "Organization",
       "@id": `${siteConfig.url}/#organization`,
       name: siteConfig.name,
+      legalName: siteConfig.legalName,
+      taxID: siteConfig.cnpj,
       url: siteConfig.url,
       logo: `${siteConfig.url}${siteConfig.logo.schemaSrc}`,
+      email: siteConfig.email,
       contactPoint: {
         "@type": "ContactPoint",
         contactType: "sales",
         telephone: "+55 85 8108-6339",
+        email: siteConfig.email,
         availableLanguage: "Portuguese",
       },
     },

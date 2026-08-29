@@ -37,7 +37,8 @@ Vamos fechar item a item, por prioridade.
 | Prova social (P0.3) | adiado, aguarda material |
 | Preço / planos (P1.2) | aberto, precisa de decisão de pricing |
 | Rename do repo (P2.7) | aguarda ação sua no GitHub |
-| Página de política de privacidade (link do banner) | aberto |
+| Página de política de privacidade / termos | feito (rascunho, revisar c/ jurídico) |
+| Rodapé: tagline + CNPJ + e-mail + ano dinâmico | feito |
 
 ---
 
@@ -224,8 +225,21 @@ O Clarity carregava direto do `index.html`, setando cookies sem consentimento.
   estiver carregado.
 - Testado ao vivo: sem consentimento nenhum script de analytics é injetado; "Aceitar" injeta o
   Clarity e persiste; "Recusar" persiste e não injeta nada.
-- Ainda falta (menor): página de política de privacidade linkada no banner. `best-practices`
-  do Lighthouse deve subir de 77 quando o teste roda sem consentimento dado.
+- No build de produção o Lighthouse `best-practices` foi de 77 para **100**.
+- Texto do banner simplificado (sem jargão) + link "Saiba mais" para `/privacidade.html`.
+
+### Rodapé + identificação legal [FEITO]
+- Tagline trocada de "Inteligência Artificial para seu CRM" (estreito, fora de posição) para
+  "CRM com WhatsApp e IA para automatizar vendas" (= o h2 do hero).
+- Ano do copyright agora é dinâmico (`new Date().getFullYear()`).
+- Linha legal nova no rodapé: **Pyper LTDA · CNPJ 67.791.377/0001-87 · contato@pyper.com.br**
+  (`siteConfig.legalName` / `siteConfig.cnpj` novos; `legalName` / `taxID` / `email` também
+  entraram no `Organization` do JSON-LD).
+- Links **Termos de Uso** e **Política de Privacidade** adicionados ao rodapé.
+- Criadas `public/termos.html` e `public/privacidade.html`: páginas estáticas, no visual da
+  marca, com aviso "Rascunho" e trechos `[ ]` a preencher (endereço, DPO, foro, data). A de
+  privacidade é orientada a LGPD (bases legais, Clarity, direitos do art. 18). **Precisam de
+  revisão jurídica antes de publicar.** `noindex` nas duas.
 
 ### P2.7 — Nome com typo [AGUARDA AÇÃO NO GITHUB]
 Não é só a pasta local: o repositório no GitHub é `pyper-devnow/pyper.ladingpage` ("lading").

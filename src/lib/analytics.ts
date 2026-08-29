@@ -125,8 +125,13 @@ function renderConsentBanner() {
   banner.setAttribute("aria-label", "Aviso de cookies");
 
   const text = document.createElement("p");
-  text.textContent =
-    "Usamos cookies de análise (Microsoft Clarity) para entender como o site é usado e melhorá-lo. Nada é carregado sem sua permissão.";
+  text.append(
+    "A gente usa cookies pra entender como você usa o site e deixá-lo melhor. ",
+  );
+  const learnMore = document.createElement("a");
+  learnMore.href = "/privacidade.html";
+  learnMore.textContent = "Saiba mais";
+  text.append(learnMore);
 
   const actions = document.createElement("div");
   actions.className = "consent-actions";
