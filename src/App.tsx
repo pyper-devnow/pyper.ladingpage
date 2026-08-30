@@ -963,10 +963,6 @@ export default function Home() {
             </p>
           </div>
           <nav className="footer-links" aria-label="Links finais">
-            <a href="#solucoes">Soluções</a>
-            <a href="#funcionalidades">Funcionalidades</a>
-            <a href="#faq">FAQ</a>
-            <a href={whatsappUrl}>WhatsApp</a>
             <a
               href="https://www.instagram.com/pyper_crm"
               target="_blank"
