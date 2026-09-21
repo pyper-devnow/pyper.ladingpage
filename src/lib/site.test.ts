@@ -4,12 +4,14 @@ import {
   automationFlows,
   buildWhatsAppUrl,
   faqItems,
+  faqSupport,
   hero,
   heroDashboard,
   jsonLdGraph,
   productShowcases,
   siteConfig,
   siteMetadata,
+  supportUrl,
   workspaceTemplates,
 } from "./site";
 
@@ -78,5 +80,23 @@ describe("Pyper landing content", () => {
       "Configuração de Agente de IA",
       "Automação de Processos de Venda",
     ]);
+  });
+});
+
+/**
+ * Dogfooding (SDD-13-A5): a landing precisa TER a saída para o nosso próprio
+ * agente. Enquanto isso não existia, toda dúvida do visitante ia para o FAQ
+ * estático ou para a fila do WhatsApp humano — o oposto do que o produto
+ * promete.
+ */
+describe("suporte atendido pelo agente", () => {
+  it("aponta para o suporte do produto, não para um formulário", () => {
+    expect(supportUrl).toContain("/suporte");
+    expect(supportUrl.startsWith("https://")).toBe(true);
+  });
+
+  it("o fecho do FAQ convida a falar com o assistente", () => {
+    expect(faqSupport.text.toLowerCase()).toContain("assistente virtual");
+    expect(faqSupport.cta.length).toBeGreaterThan(0);
   });
 });

@@ -38,6 +38,7 @@ import {
   buildWhatsAppUrl,
   capabilities,
   faqItems,
+  faqSupport,
   hero,
   heroDashboard,
   jsonLdGraph,
@@ -46,6 +47,7 @@ import {
   pipelineStages,
   productShowcases,
   siteConfig,
+  supportUrl,
   workspaceTemplates,
 } from "@/lib/site";
 
@@ -581,6 +583,7 @@ export default function Home() {
             <a href="#funcionalidades">Funcionalidades</a>
             <a href="#auto-implantacao">Auto Implantação</a>
             <a href="#faq">FAQ</a>
+            <a href={supportUrl} target="_blank" rel="noopener noreferrer">Suporte</a>
             <a href="https://www.instagram.com/pyper_crm" target="_blank" rel="noopener noreferrer">Instagram</a>
           </nav>
 
@@ -905,6 +908,25 @@ export default function Home() {
                   <p>{item.answer}</p>
                 </details>
               ))}
+            </div>
+
+            {/*
+              Dogfooding (SDD-13-A5): a dúvida que a lista não cobre não vai
+              para um formulário nem para a fila do WhatsApp humano — vai para
+              o nosso próprio agente. É a prova pública do produto, no lugar
+              onde a pessoa está justamente com uma pergunta na mão.
+            */}
+            <div className="faq-support">
+              <h3>{faqSupport.title}</h3>
+              <p>{faqSupport.text}</p>
+              <a
+                className="button button-primary"
+                href={supportUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {faqSupport.cta}
+              </a>
             </div>
           </div>
         </section>

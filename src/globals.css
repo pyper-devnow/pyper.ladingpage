@@ -3716,3 +3716,25 @@ input {
     justify-content: flex-end;
   }
 }
+
+/* Fecho da seção de dúvidas: a saída para o nosso próprio agente (SDD-13-A5). */
+.faq-support {
+  margin-top: 2rem;
+  padding: 1.75rem;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--surface-2, rgba(255, 255, 255, 0.03));
+  text-align: center;
+}
+
+.faq-support h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.faq-support p {
+  margin: 0 auto 1.25rem;
+  max-width: 34rem;
+  color: var(--muted-foreground, rgba(255, 255, 255, 0.65));
+}

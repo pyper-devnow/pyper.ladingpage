@@ -16,6 +16,17 @@ export const siteConfig = {
   },
 } as const;
 
+/**
+ * Suporte atendido pelo próprio agente da Pyper (SDD-13-A5, dogfooding).
+ *
+ * Mora no produto, não aqui: é o mesmo motor que o cliente contrata, com a
+ * nossa base de conhecimento, o nosso teto de abuso e o transbordo caindo no
+ * time. Duplicar o chat neste site estático significaria manter duas
+ * implementações do mesmo atendimento — e a que o visitante veria não seria a
+ * que a gente vende.
+ */
+export const supportUrl = "https://app.pyper.com.br/suporte";
+
 export function buildWhatsAppUrl(message: string = siteConfig.whatsappMessage) {
   return `https://wa.me/${siteConfig.whatsappPhone}?text=${encodeURIComponent(message)}`;
 }
@@ -298,6 +309,13 @@ export const pipelineStages = [
   { title: "Proposta", count: "6", accent: "amber" },
   { title: "Fechamento", count: "4", accent: "green" },
 ] as const;
+
+/** Fecho da seção de dúvidas: quem não achou a dele fala com o agente. */
+export const faqSupport = {
+  title: "Não achou a sua dúvida?",
+  text: "Fale com o nosso assistente virtual. É o mesmo agente que a gente vende — ele responde na hora e chama alguém do time quando precisa.",
+  cta: "Falar com o assistente",
+} as const;
 
 export const faqItems = [
   {
