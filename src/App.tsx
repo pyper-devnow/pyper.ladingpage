@@ -578,15 +578,6 @@ export default function Home() {
             />
           </a>
 
-          <nav className="desktop-nav" aria-label="Seções da página">
-            <a href="#solucoes">Soluções</a>
-            <a href="#funcionalidades">Funcionalidades</a>
-            <a href="#auto-implantacao">Auto Implantação</a>
-            <a href="#faq">FAQ</a>
-            <a href={supportUrl} target="_blank" rel="noopener noreferrer">Suporte</a>
-            <a href="https://www.instagram.com/pyper_crm" target="_blank" rel="noopener noreferrer">Instagram</a>
-          </nav>
-
           <div className="nav-actions">
             <a className="login-link" href="https://app.pyper.com.br/login" target="_blank" rel="noopener noreferrer">
               Login
