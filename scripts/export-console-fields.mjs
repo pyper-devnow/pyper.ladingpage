@@ -2,6 +2,7 @@
 // (pyper.platform/src/features/platform-landing/landing-fields.gen.ts).
 // Uso: npm run export:console-fields
 import { build } from "esbuild";
+import { execFileSync } from "node:child_process";
 import { mkdtempSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { dirname, join, resolve } from "node:path";
@@ -67,6 +68,15 @@ export interface LandingFieldGroup {
 export const LANDING_FIELD_GROUPS: LandingFieldGroup[] = ${JSON.stringify(groups, null, 2)};
 `;
   writeFileSync(target, body);
+  // Formata com o prettier do pyper.platform, senão o eslint de lá reprova o arquivo.
+  try {
+    execFileSync("npx", ["prettier", "--write", target], {
+      cwd: resolve(dirname(target), "../../.."),
+      stdio: "ignore",
+    });
+  } catch {
+    console.warn("prettier não rodou: formate o arquivo gerado no pyper.platform.");
+  }
   const total = groups.reduce((n, g) => n + g.fields.length, 0);
   console.log(`${groups.length} grupos, ${total} campos -> ${target}`);
 } finally {
