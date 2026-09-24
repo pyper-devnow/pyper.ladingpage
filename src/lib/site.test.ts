@@ -36,17 +36,19 @@ describe("Pyper landing content", () => {
       "CRM integrado com WhatsApp e Inteligência Artificial",
     );
     expect(siteConfig.url).toBe("https://pyper.com.br");
-    expect(siteConfig.logo.src).toBe("/logo-pyper-crm-v2.png");
+    expect(siteConfig.logo.src).toBe("/logo-pyper-crm-v2-400.webp");
     expect(siteConfig.logo.schemaSrc).toBe("/logo-pyper-crm-v2.png");
-    expect(heroDashboard.src).toBe("/dashboard-crm-pyper.png");
-    expect(heroDashboard.width).toBeGreaterThanOrEqual(1800);
-    expect(heroDashboard.height).toBeGreaterThanOrEqual(1040);
+    expect(heroDashboard.src).toBe("/dashboard-crm-pyper.webp");
+    expect(heroDashboard.width).toBe(1672);
+    expect(heroDashboard.height).toBe(941);
   });
 
   it("exposes FAQ and structured data for search engines", () => {
     expect(faqItems).toHaveLength(4);
     expect(jsonLdGraph["@graph"].map((item) => item["@type"])).toEqual([
       "Organization",
+      "WebSite",
+      "WebPage",
       "SoftwareApplication",
       "FAQPage",
     ]);

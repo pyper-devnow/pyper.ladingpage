@@ -15,6 +15,7 @@
 
 # build output (gerado no deploy)
 /dist
+/dist-ssr
 
 # misc
 .DS_Store

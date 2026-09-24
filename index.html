@@ -2,8 +2,25 @@
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/LOGO_LITE.PNG" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#159653" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <meta name="author" content="Pyper" />
+
+    <!-- Imagem principal (LCP) e API da landing (textos do Console e métricas). -->
+    <link
+      rel="preload"
+      as="image"
+      href="/dashboard-crm-pyper.webp"
+      imagesrcset="/dashboard-crm-pyper-900.webp 900w, /dashboard-crm-pyper.webp 1672w"
+      imagesizes="(max-width: 960px) 100vw, 1180px"
+      type="image/webp"
+      fetchpriority="high"
+    />
+    <link rel="preconnect" href="https://api.pyper.com.br" crossorigin />
+    <link rel="dns-prefetch" href="https://api.pyper.com.br" />
     <title>Pyper | CRM com WhatsApp, Inteligência Artificial e Automação</title>
     <meta
       name="description"
@@ -13,7 +30,8 @@
       name="keywords"
       content="CRM com WhatsApp, CRM integrado com WhatsApp, melhor CRM para WhatsApp, chatbot IA para WhatsApp, automação de vendas no WhatsApp, qualificação de leads automática, agentes de IA com MCP, CRM com IA, automação comercial Brasil"
     />
-    <link rel="canonical" href="https://pyper.com.br" />
+    <link rel="canonical" href="https://pyper.com.br/" />
+    <link rel="alternate" hreflang="pt-BR" href="https://pyper.com.br/" />
 
     <!-- Open Graph -->
     <meta property="og:title" content="Pyper | CRM com WhatsApp, Inteligência Artificial e Automação" />
@@ -21,7 +39,7 @@
       property="og:description"
       content="CRM integrado com WhatsApp e Inteligência Artificial. Agentes de IA com MCP para consultar leads, atualizar oportunidades e apoiar sua equipe comercial."
     />
-    <meta property="og:url" content="https://pyper.com.br" />
+    <meta property="og:url" content="https://pyper.com.br/" />
     <meta property="og:site_name" content="Pyper" />
     <meta property="og:locale" content="pt_BR" />
     <meta property="og:type" content="website" />
@@ -29,6 +47,7 @@
       property="og:image"
       content="https://pyper.com.br/opengraph-image.png"
     />
+    <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta
@@ -47,10 +66,18 @@
       name="twitter:image"
       content="https://pyper.com.br/opengraph-image.png"
     />
+    <meta
+      name="twitter:image:alt"
+      content="Dashboard da Pyper com CRM, WhatsApp e agentes de IA"
+    />
   </head>
   <body>
     <div id="root"></div>
+    <noscript>
+      Pyper: CRM com WhatsApp, Inteligência Artificial e Automação. Fale com a
+      gente pelo WhatsApp: https://wa.me/558581086339
+    </noscript>
     <script type="module" src="/src/main.tsx"></script>
+    <!-- Analytics (Clarity/GA4/Plausible) carrega em src/lib/analytics.ts, só após consentimento (LGPD). -->
   </body>
-  <!-- Analytics (Clarity/GA4/Plausible) carrega em src/lib/analytics.ts, só após consentimento (LGPD). -->
 </html>

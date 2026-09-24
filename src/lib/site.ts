@@ -8,11 +8,13 @@ export const siteConfig = {
   whatsappMessage: "Olá, quero agendar uma demonstração da Pyper.",
   email: "contato@pyper.com.br",
   logo: {
-    src: "/logo-pyper-crm-v2.png",
+    // WebP de 400px (a logo aparece com no máximo 176px); o PNG grande fica
+    // para os dados estruturados.
+    src: "/logo-pyper-crm-v2-400.webp",
     schemaSrc: "/logo-pyper-crm-v2.png",
     alt: "Logo da Pyper",
-    width: 1965,
-    height: 800,
+    width: 400,
+    height: 163,
   },
 } as const;
 
@@ -48,10 +50,12 @@ export const hero = {
 } as const;
 
 export const heroDashboard = {
-  src: "/dashboard-crm-pyper.png",
+  src: "/dashboard-crm-pyper.webp",
+  srcSet: "/dashboard-crm-pyper-900.webp 900w, /dashboard-crm-pyper.webp 1672w",
+  sizes: "(max-width: 960px) 100vw, 1180px",
   alt: "Dashboard da Pyper com quadro de tarefas, pipeline e agente de IA",
-  width: 1800,
-  height: 1040,
+  width: 1672,
+  height: 941,
 } as const;
 
 export const siteMetadata = {
@@ -340,55 +344,91 @@ export const faqItems = [
   },
 ] as const;
 
-export const jsonLdGraph = {
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Organization",
-      "@id": `${siteConfig.url}/#organization`,
-      name: siteConfig.name,
-      legalName: siteConfig.legalName,
-      taxID: siteConfig.cnpj,
-      url: siteConfig.url,
-      logo: `${siteConfig.url}${siteConfig.logo.schemaSrc}`,
-      email: siteConfig.email,
-      contactPoint: {
-        "@type": "ContactPoint",
-        contactType: "sales",
-        telephone: "+55 85 8108-6339",
+export const socialProfiles = ["https://www.instagram.com/pyper_crm"] as const;
+
+/**
+ * Dados estruturados (schema.org). Função, e não constante, para refletir os
+ * textos que o Console trocou (FAQ, descrição) na hora do render.
+ */
+export function buildJsonLdGraph() {
+  const logo = `${siteConfig.url}${siteConfig.logo.schemaSrc}`;
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": `${siteConfig.url}/#organization`,
+        name: siteConfig.name,
+        legalName: siteConfig.legalName,
+        taxID: siteConfig.cnpj,
+        url: siteConfig.url,
+        logo: { "@type": "ImageObject", url: logo, width: siteConfig.logo.width, height: siteConfig.logo.height },
         email: siteConfig.email,
-        availableLanguage: "Portuguese",
-      },
-    },
-    {
-      "@type": "SoftwareApplication",
-      "@id": `${siteConfig.url}/#software`,
-      name: "Pyper CRM",
-      applicationCategory: "BusinessApplication",
-      operatingSystem: "Web",
-      url: siteConfig.url,
-      description: siteMetadata.description,
-      offers: {
-        "@type": "Offer",
-        price: "0",
-        priceCurrency: "BRL",
-        availability: "https://schema.org/InStock",
-      },
-    },
-    {
-      "@type": "FAQPage",
-      "@id": `${siteConfig.url}/#faq`,
-      mainEntity: faqItems.map((item) => ({
-        "@type": "Question",
-        name: item.question,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: item.answer,
+        sameAs: [...socialProfiles],
+        contactPoint: {
+          "@type": "ContactPoint",
+          contactType: "sales",
+          telephone: `+${siteConfig.whatsappPhone}`,
+          email: siteConfig.email,
+          areaServed: "BR",
+          availableLanguage: "Portuguese",
         },
-      })),
-    },
-  ],
-} as const;
+      },
+      {
+        "@type": "WebSite",
+        "@id": `${siteConfig.url}/#website`,
+        url: siteConfig.url,
+        name: siteConfig.name,
+        inLanguage: "pt-BR",
+        publisher: { "@id": `${siteConfig.url}/#organization` },
+      },
+      {
+        "@type": "WebPage",
+        "@id": `${siteConfig.url}/#webpage`,
+        url: siteConfig.url,
+        name: siteMetadata.title,
+        description: siteMetadata.description,
+        inLanguage: "pt-BR",
+        isPartOf: { "@id": `${siteConfig.url}/#website` },
+        about: { "@id": `${siteConfig.url}/#software` },
+        primaryImageOfPage: `${siteConfig.url}/opengraph-image.png`,
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": `${siteConfig.url}/#software`,
+        name: "Pyper CRM",
+        applicationCategory: "BusinessApplication",
+        applicationSubCategory: "CRM",
+        operatingSystem: "Web",
+        url: siteConfig.url,
+        image: `${siteConfig.url}${heroDashboard.src}`,
+        description: siteMetadata.description,
+        publisher: { "@id": `${siteConfig.url}/#organization` },
+        offers: {
+          "@type": "Offer",
+          price: "0",
+          priceCurrency: "BRL",
+          availability: "https://schema.org/InStock",
+        },
+      },
+      {
+        "@type": "FAQPage",
+        "@id": `${siteConfig.url}/#faq`,
+        mainEntity: faqItems.map((item) => ({
+          "@type": "Question",
+          name: item.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: item.answer,
+          },
+        })),
+      },
+    ],
+  };
+}
+
+/** Foto com os textos padrão (usada pelos testes). */
+export const jsonLdGraph = buildJsonLdGraph();
 
 export const landingCopy = {
   headline: "Seu CRM organiza.",
@@ -410,6 +450,77 @@ export const landingCopy = {
   journey: ["Organize sua operação", "Conecte agentes via MCP", "Acompanhe cada venda"],
   productSelectorLabel: "Explore os recursos da Pyper",
   productViews: ["Atendimento no WhatsApp", "Funil de vendas", "Agentes e automações"],
+} as const;
+
+/**
+ * Textos das seções que antes ficavam fixos no App.tsx. Tudo aqui pode ser
+ * trocado pelo Console Master (content.texts, pelo caminho da chave).
+ */
+export const sectionCopy = {
+  nav: {
+    aiMcp: "IA e MCP",
+    solutions: "Soluções",
+    autoImplementation: "Auto Implantação",
+    faq: "FAQ",
+    support: "Suporte",
+    login: "Login",
+  },
+  pain: {
+    kicker: "Atendimento lento custa vendas",
+    title: "Sua empresa ainda vende pelo WhatsApp,",
+    titleAccent: "mas gerencia tudo no improviso?",
+    description:
+      "O WhatsApp é rápido, mas sem um sistema por trás vira caos. Veja o que acontece quando sua equipe não tem a ferramenta certa.",
+  },
+  solution: {
+    kicker: "A solução Pyper",
+    title: "Uma plataforma para transformar",
+    titleAccent: "conversas em processos claros.",
+    automationTitle: "Crie sua própria automação e seu Agente de forma simplificada",
+  },
+  prospect: {
+    kicker: "Prospect Inteligente",
+    title: "Encontre seu cliente ideal em segundos com IA",
+    description:
+      "Defina sua persona ideal e deixe nossa IA vasculhar o mercado. Chega de listas frias compradas no escuro. Gere leads qualificados que realmente precisam da sua solução.",
+    features: [
+      "Filtros geográficos e de faturamento precisos.",
+      "Matching semântico baseado em intenção de compra.",
+      "Importação direta para seu funil de vendas.",
+    ],
+    windowTitle: "Gerador de Leads IA",
+    searches: [
+      "Construtoras de médio porte em São Paulo",
+      "Clínicas odontológicas no Rio de Janeiro",
+      "Agências de marketing em Belo Horizonte",
+    ],
+    leads: [
+      { id: "vanguard", name: "Vanguard Engenharia Ltda", sub: "Construção Civil • São Paulo, SP", match: "98% Match" },
+      { id: "estrutura", name: "Estrutura Forte S.A.", sub: "Infraestrutura • Campinas, SP", match: "92% Match" },
+      { id: "marmoraria", name: "Marmoraria & Construções", sub: "Acabamentos • São Paulo, SP", match: "85% Match" },
+    ],
+    addLabel: "Adicionar CRM",
+    addedLabel: "Adicionado",
+  },
+  capabilitiesTitle: "Funcionalidades da Pyper",
+  trust: {
+    strong: "Menos retrabalho.",
+    text: "Conversas que movem negócios.",
+  },
+  faq: {
+    kicker: "Perguntas frequentes",
+    title: "O que saber antes da demo.",
+  },
+  final: {
+    text: "Fale com a gente pelo WhatsApp e veja como a Pyper entra na sua operação comercial.",
+    secondaryCta: "Ver como funciona",
+  },
+  footer: {
+    tagline: "CRM com WhatsApp e IA para automatizar vendas.",
+    instagram: "Instagram",
+    terms: "Termos de Uso",
+    privacy: "Política de Privacidade",
+  },
 } as const;
 
 export const aiMcp = {
