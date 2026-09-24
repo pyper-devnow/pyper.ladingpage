@@ -5,10 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "tsc && vite build && vite build --ssr src/entry-server.tsx --outDir dist-ssr && node scripts/prerender.mjs",
     "preview": "vite preview",
     "lint": "eslint",
-    "test": "vitest run"
+    "test": "vitest run",
+    "export:console-fields": "node scripts/export-console-fields.mjs"
   },
   "dependencies": {
     "@fontsource/geist-sans": "^5.1.1",

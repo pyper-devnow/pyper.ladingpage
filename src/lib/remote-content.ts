@@ -4,7 +4,9 @@
 // Console salva só substitui campo preenchido. A última resposta fica guardada
 // no navegador, então quem volta já abre com o texto novo, sem piscar.
 import { apiBase } from "./api-base";
-import { hero, siteConfig, siteMetadata } from "./site";
+import * as site from "./site";
+import { hero, landingCopy, siteConfig, siteMetadata } from "./site";
+import { getText, setText } from "./text-paths";
 
 export type LandingAnnouncement = {
   enabled: boolean;
@@ -18,6 +20,8 @@ export type LandingContent = {
   hero?: Partial<Record<"eyebrow" | "title" | "subtitle" | "primaryCta" | "secondaryCta", string | null>> | null;
   contact?: Partial<Record<"whatsappPhone" | "whatsappMessage" | "email", string | null>> | null;
   seo?: Partial<Record<"title" | "description", string | null>> | null;
+  /** Qualquer texto do site.ts pelo caminho (ex.: "faqItems.0.question"). */
+  texts?: Record<string, string> | null;
 };
 
 const CACHE_KEY = "pyper_landing_content";
@@ -35,6 +39,13 @@ const defaults = {
     email: siteConfig.email,
   } as Mutable,
   seo: { title: siteMetadata.title, description: siteMetadata.description } as Mutable,
+};
+
+// Padrão de cada texto trocado pelo Console, para voltar quando a chave sai.
+const textDefaults = new Map<string, string>();
+const headlineDefaults = {
+  headline: landingCopy.headline as string,
+  headlineAccent: landingCopy.headlineAccent as string,
 };
 
 let current: LandingContent = {};
@@ -66,12 +77,42 @@ function setMeta(name: string, content: string) {
   if (el) el.content = content;
 }
 
+/**
+ * Textos por caminho. Só troca texto que já existe no site.ts; chave que saiu
+ * do Console volta ao padrão.
+ */
+export function applyTexts(texts: Record<string, string> | null | undefined): boolean {
+  let changed = false;
+  const next = texts ?? {};
+  for (const [key, original] of textDefaults) {
+    if (!filled(next[key])) changed = setText(key, original) || changed;
+  }
+  for (const [key, value] of Object.entries(next)) {
+    if (!filled(value)) continue;
+    const before = getText(key);
+    if (before === undefined) continue;
+    if (!textDefaults.has(key)) textDefaults.set(key, before);
+    changed = setText(key, value.trim()) || changed;
+  }
+  return changed;
+}
+
 /** Aplica o conteúdo sobre os objetos do site.ts. Devolve se algo mudou. */
 export function applyContent(content: LandingContent | null | undefined): boolean {
   const next = content ?? {};
-  let changed = assignAll(hero as unknown as Mutable, defaults.hero, next.hero as Mutable);
-  changed = assignAll(siteConfig as unknown as Mutable, defaults.contact, next.contact as Mutable) || changed;
-  changed = assignAll(siteMetadata as unknown as Mutable, defaults.seo, next.seo as Mutable) || changed;
+  // Os passos abaixo repõem o padrão antes de aplicar; o que vale é a foto final.
+  const before = JSON.stringify(site);
+  assignAll(hero as unknown as Mutable, defaults.hero, next.hero as Mutable);
+  assignAll(siteConfig as unknown as Mutable, defaults.contact, next.contact as Mutable);
+  assignAll(siteMetadata as unknown as Mutable, defaults.seo, next.seo as Mutable);
+  // Campo antigo "Título" do Console: vira o título inteiro do topo (uma linha).
+  const legacyTitle = pick(next.hero?.title, null) as string | null;
+  const headline = (legacyTitle
+    ? { headline: legacyTitle, headlineAccent: "" }
+    : headlineDefaults) as Mutable;
+  assignAll(landingCopy as unknown as Mutable, headline, null);
+  applyTexts(next.texts);
+  let changed = JSON.stringify(site) !== before;
   if (JSON.stringify(current.announcement ?? null) !== JSON.stringify(next.announcement ?? null)) {
     changed = true;
   }

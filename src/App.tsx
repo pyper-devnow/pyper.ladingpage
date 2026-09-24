@@ -33,11 +33,12 @@ import {
   faqSupport,
   hero,
   heroDashboard,
-  jsonLdGraph,
+  buildJsonLdGraph,
   landingCopy,
   painPoints,
   pipelineStages,
   productShowcases,
+  sectionCopy,
   siteConfig,
   supportUrl,
   workspaceTemplates,
@@ -121,17 +122,13 @@ const kanbanCards = [
 ] as const;
 
 function TypewriterInput() {
-  const words = [
-    "Construtoras de médio porte em São Paulo",
-    "Clínicas odontológicas no Rio de Janeiro",
-    "Agências de marketing em Belo Horizonte",
-  ];
+  const words = sectionCopy.prospect.searches;
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [currentText, setCurrentText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    if (typeof window.matchMedia === "function" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       setCurrentText(words[0]);
       return;
     }
@@ -183,26 +180,7 @@ function ProspectInteligenteSection() {
     );
   };
 
-  const leads = [
-    {
-      id: "vanguard",
-      name: "Vanguard Engenharia Ltda",
-      sub: "Construção Civil • São Paulo, SP",
-      match: "98% Match",
-    },
-    {
-      id: "estrutura",
-      name: "Estrutura Forte S.A.",
-      sub: "Infraestrutura • Campinas, SP",
-      match: "92% Match",
-    },
-    {
-      id: "marmoraria",
-      name: "Marmoraria & Construções",
-      sub: "Acabamentos • São Paulo, SP",
-      match: "85% Match",
-    },
-  ];
+  const leads = sectionCopy.prospect.leads;
 
   return (
     <section className="section prospect-inteligente-section" id="prospect-inteligente">
@@ -215,7 +193,7 @@ function ProspectInteligenteSection() {
               <div className="prospect-logo-badge">
                 <Sparkles size={16} className="prospect-sparkles-icon" />
               </div>
-              <span className="prospect-header-title">Gerador de Leads IA</span>
+              <span className="prospect-header-title">{sectionCopy.prospect.windowTitle}</span>
             </div>
 
             {/* Typewriter Input */}
@@ -244,10 +222,10 @@ function ProspectInteligenteSection() {
                         {isAdded ? (
                           <>
                             <CheckCheck size={14} style={{ marginRight: 4 }} />
-                            Adicionado
+                            {sectionCopy.prospect.addedLabel}
                           </>
                         ) : (
-                          "Adicionar CRM"
+                          sectionCopy.prospect.addLabel
                         )}
                       </button>
                     </div>
@@ -260,31 +238,18 @@ function ProspectInteligenteSection() {
 
         {/* Right Copy Content */}
         <div className="prospect-copy-container">
-          <p className="feature-pill">Prospect Inteligente</p>
-          <h2 className="prospect-title">Encontre seu cliente ideal em segundos com IA</h2>
-          <p className="prospect-description">
-            Defina sua persona ideal e deixe nossa IA vasculhar o mercado. Chega de listas frias
-            compradas no escuro. Gere leads qualificados que realmente precisam da sua solução.
-          </p>
+          <p className="feature-pill">{sectionCopy.prospect.kicker}</p>
+          <h2 className="prospect-title">{sectionCopy.prospect.title}</h2>
+          <p className="prospect-description">{sectionCopy.prospect.description}</p>
           <ul className="prospect-features-list">
-            <li>
-              <span className="bullet-circle">
-                <CheckCircle2 size={16} />
-              </span>
-              Filtros geográficos e de faturamento precisos.
-            </li>
-            <li>
-              <span className="bullet-circle">
-                <CheckCircle2 size={16} />
-              </span>
-              Matching semântico baseado em intenção de compra.
-            </li>
-            <li>
-              <span className="bullet-circle">
-                <CheckCircle2 size={16} />
-              </span>
-              Importação direta para seu funil de vendas.
-            </li>
+            {sectionCopy.prospect.features.map((feature) => (
+              <li key={feature}>
+                <span className="bullet-circle">
+                  <CheckCircle2 size={16} aria-hidden="true" />
+                </span>
+                {feature}
+              </li>
+            ))}
           </ul>
         </div>
       </div>
@@ -321,7 +286,7 @@ function AiMcpSection() {
 
 export default function Home() {
   const whatsappUrl = buildWhatsAppUrl();
-  const jsonLd = JSON.stringify(jsonLdGraph).replace(/</g, "\\u003c");
+  const jsonLd = JSON.stringify(buildJsonLdGraph()).replace(/</g, "\\u003c");
   const year = new Date().getFullYear();
   const [productView, setProductView] = useState(1);
 
@@ -346,16 +311,16 @@ export default function Home() {
           </a>
 
           <nav className="desktop-nav" aria-label="Seções da página">
-            <a href="#ia-mcp">IA e MCP</a>
-            <a href="#solucoes">Soluções</a>
-            <a href="#auto-implantacao">Auto Implantação</a>
-            <a href="#faq">FAQ</a>
-            <a href={supportUrl} target="_blank" rel="noopener noreferrer">Suporte</a>
+            <a href="#ia-mcp">{sectionCopy.nav.aiMcp}</a>
+            <a href="#solucoes">{sectionCopy.nav.solutions}</a>
+            <a href="#auto-implantacao">{sectionCopy.nav.autoImplementation}</a>
+            <a href="#faq">{sectionCopy.nav.faq}</a>
+            <a href={supportUrl} target="_blank" rel="noopener noreferrer">{sectionCopy.nav.support}</a>
           </nav>
 
           <div className="nav-actions">
             <a className="login-link" href="https://app.pyper.com.br/login" target="_blank" rel="noopener noreferrer">
-              Login
+              {sectionCopy.nav.login}
             </a>
             <a className="button button-primary" href={whatsappUrl}>
               {hero.primaryCta}
@@ -369,7 +334,7 @@ export default function Home() {
           <div className="site-shell">
             <div className="hero-intro">
               <p className="hero-category"><span className="status-dot" aria-hidden="true" />{hero.eyebrow}</p>
-              <h1>{landingCopy.headline}{" "}<span>{landingCopy.headlineAccent}</span></h1>
+              <h1>{landingCopy.headline}{landingCopy.headlineAccent ? <>{" "}<span>{landingCopy.headlineAccent}</span></> : null}</h1>
               <p className="hero-description">{hero.subtitle}</p>
               <div className="cta-row centered">
                 <a className="button button-primary" href={whatsappUrl}>{hero.primaryCta}<ArrowRight size={18} aria-hidden="true" /></a>
@@ -379,7 +344,7 @@ export default function Home() {
             </div>
             <figure className="product-preview" id="visao-geral">
               <div className="preview-toolbar"><span className="preview-brand">pyper<span> / </span>{landingCopy.previewTitle}</span><span className="preview-label">{landingCopy.previewLabel}</span></div>
-              <img src={heroDashboard.src} alt={heroDashboard.alt} width={heroDashboard.width} height={heroDashboard.height} fetchPriority="high" />
+              <img src={heroDashboard.src} srcSet={heroDashboard.srcSet} sizes={heroDashboard.sizes} alt={heroDashboard.alt} width={heroDashboard.width} height={heroDashboard.height} fetchPriority="high" decoding="async" />
             </figure>
             <div className="product-journey" aria-label={landingCopy.journeyLabel}>
               {landingCopy.journey.map((item, index) => <div key={item}><CheckCircle2 size={18} aria-hidden="true" /><span>{item}</span>{index < landingCopy.journey.length - 1 && <ArrowRight className="journey-arrow" size={16} aria-hidden="true" />}</div>)}
@@ -404,17 +369,13 @@ export default function Home() {
         <section className="section section-muted">
           <div className="site-shell">
             <div className="section-heading">
-              <p className="section-kicker">Atendimento lento custa vendas</p>
+              <p className="section-kicker">{sectionCopy.pain.kicker}</p>
               <h2 className="section-title">
-                Sua empresa ainda vende pelo WhatsApp,
+                {sectionCopy.pain.title}
                 <br />
-                <span>mas gerencia tudo no improviso?</span>
+                <span>{sectionCopy.pain.titleAccent}</span>
               </h2>
-              <p className="section-copy">
-                O WhatsApp é rápido, mas sem um sistema por trás vira caos.
-                Veja o que acontece quando sua equipe não tem a ferramenta
-                certa.
-              </p>
+              <p className="section-copy">{sectionCopy.pain.description}</p>
             </div>
 
             <div className="card-grid">
@@ -437,11 +398,11 @@ export default function Home() {
         <section className="section solution-section" id="solucoes">
           <div className="site-shell">
             <div className="section-heading">
-              <p className="section-kicker">A solução Pyper</p>
+              <p className="section-kicker">{sectionCopy.solution.kicker}</p>
               <h2 className="section-title">
-                Uma plataforma para transformar
+                {sectionCopy.solution.title}
                 <br />
-                conversas em processos claros.
+                {sectionCopy.solution.titleAccent}
               </h2>
             </div>
 
@@ -476,7 +437,7 @@ export default function Home() {
               <div className="automation-section-wrapper">
                 <div style={{ textAlign: "center", marginBottom: "32px" }}>
                   <h3 style={{ fontSize: "24px", fontWeight: "760", color: "var(--foreground)", letterSpacing: "-0.02em" }}>
-                    Crie sua própria automação e seu Agente de forma simplificada
+                    {sectionCopy.solution.automationTitle}
                   </h3>
                 </div>
                 <div className="automation-grid">
@@ -499,13 +460,14 @@ export default function Home() {
             <span className="icon-box small">
               <Workflow size={16} aria-hidden="true" />
             </span>
-            <strong>Menos retrabalho.</strong>
-            <span>Conversas que movem negócios.</span>
+            <strong>{sectionCopy.trust.strong}</strong>
+            <span>{sectionCopy.trust.text}</span>
           </div>
         </section>
 
-        <section className="section section-muted" id="funcionalidades">
+        <section className="section section-muted" id="funcionalidades" aria-labelledby="funcionalidades-title">
           <div className="site-shell">
+            <h2 className="sr-only" id="funcionalidades-title">{sectionCopy.capabilitiesTitle}</h2>
             <div className="card-grid four">
               {capabilities.map((item) => {
                 const Icon = iconMap[item.icon];
@@ -524,8 +486,8 @@ export default function Home() {
         <section className="section faq-section" id="faq">
           <div className="site-shell narrow-shell">
             <div className="section-heading">
-              <p className="section-kicker">Perguntas frequentes</p>
-              <h2 className="section-title">O que saber antes da demo.</h2>
+              <p className="section-kicker">{sectionCopy.faq.kicker}</p>
+              <h2 className="section-title">{sectionCopy.faq.title}</h2>
             </div>
 
             <div className="faq-list">
@@ -570,14 +532,13 @@ export default function Home() {
                 alt={siteConfig.logo.alt}
                 width={siteConfig.logo.width}
                 height={siteConfig.logo.height}
+                loading="lazy"
+                decoding="async"
               />
               <h2>
                 {landingCopy.finalTitle}
               </h2>
-              <p>
-                Fale com a gente pelo WhatsApp e veja como a Pyper entra na sua
-                operação comercial.
-              </p>
+              <p>{sectionCopy.final.text}</p>
               <div className="cta-row centered">
                 <a className="button button-primary" href={whatsappUrl}>
                   {hero.primaryCta}
@@ -585,7 +546,7 @@ export default function Home() {
                 </a>
                 <a className="button button-secondary" href="#solucoes">
                   <LayoutGrid size={18} aria-hidden="true" />
-                  Ver como funciona
+                  {sectionCopy.final.secondaryCta}
                 </a>
               </div>
             </div>
@@ -602,10 +563,11 @@ export default function Home() {
               alt={siteConfig.logo.alt}
               width={siteConfig.logo.width}
               height={siteConfig.logo.height}
+              loading="lazy"
+              decoding="async"
             />
             <p>
-              © {year} {siteConfig.name}. CRM com WhatsApp e IA para automatizar
-              vendas.
+              © {year} {siteConfig.name}. {sectionCopy.footer.tagline}
             </p>
             <p className="footer-legal">
               {siteConfig.legalName} · CNPJ {siteConfig.cnpj} ·{" "}
@@ -619,10 +581,10 @@ export default function Home() {
               rel="noopener noreferrer"
               style={{ display: "inline-flex", alignItems: "center", gap: "6px" }}
             >
-              <Instagram size={14} /> Instagram
+              <Instagram size={14} aria-hidden="true" /> {sectionCopy.footer.instagram}
             </a>
-            <a href="/termos.html">Termos de Uso</a>
-            <a href="/privacidade.html">Política de Privacidade</a>
+            <a href="/termos.html">{sectionCopy.footer.terms}</a>
+            <a href="/privacidade.html">{sectionCopy.footer.privacy}</a>
           </nav>
         </div>
       </footer>
@@ -644,6 +606,16 @@ const workspaceStatIconMap = {
   widgets: CreditCard,
 } satisfies Record<string, LucideIcon>;
 
+/** Destaca palavras dentro de um texto editável, sem exigir HTML no Console. */
+function emphasize(text: string, words: string[], tag: "span" | "strong"): ReactNode[] {
+  const escaped = words.map((word) => word.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+  const pattern = new RegExp(`(${escaped.join("|")})`, "g");
+  const Tag = tag;
+  return text.split(pattern).map((part, index) =>
+    words.includes(part) ? <Tag key={index}>{part}</Tag> : part,
+  );
+}
+
 function WorkspaceBuilderMockup() {
   return (
     <div className="workspace-builder" aria-label={autoImplementation.image.alt}>
@@ -656,6 +628,8 @@ function WorkspaceBuilderMockup() {
         alt=""
         width={siteConfig.logo.width}
         height={siteConfig.logo.height}
+        loading="lazy"
+        decoding="async"
       />
 
       <div className="workspace-builder-header">
@@ -663,14 +637,9 @@ function WorkspaceBuilderMockup() {
           <CheckSquare size={16} aria-hidden="true" />
           {autoImplementation.workspaceKicker}
         </p>
-        <h3>
-          Como você vai usar o <span>pyper</span>?
-        </h3>
+        <h3>{emphasize(autoImplementation.workspaceTitle, ["pyper"], "span")}</h3>
         <p>
-          Escolha um modelo e seu workspace já vem com{" "}
-          <strong>pipeline</strong>, <strong>dashboard</strong> e{" "}
-          <strong>automações</strong> prontos — sem partir de uma tela em
-          branco.
+          {emphasize(autoImplementation.workspaceSubtitle, ["pipeline", "dashboard", "automações"], "strong")}
         </p>
       </div>
 
