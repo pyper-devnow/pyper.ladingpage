@@ -36,8 +36,8 @@ describe("Pyper landing content", () => {
       "CRM integrado com WhatsApp e Inteligência Artificial",
     );
     expect(siteConfig.url).toBe("https://pyper.com.br");
-    expect(siteConfig.logo.src).toBe("/logo-pyper-wordmark.png");
-    expect(siteConfig.logo.schemaSrc).toBe("/logo-pyper-official.png");
+    expect(siteConfig.logo.src).toBe("/logo-pyper-crm-v2.png");
+    expect(siteConfig.logo.schemaSrc).toBe("/logo-pyper-crm-v2.png");
     expect(heroDashboard.src).toBe("/dashboard-crm-pyper.png");
     expect(heroDashboard.width).toBeGreaterThanOrEqual(1800);
     expect(heroDashboard.height).toBeGreaterThanOrEqual(1040);
@@ -53,10 +53,10 @@ describe("Pyper landing content", () => {
   });
 
   it("defines the auto implementation section from the approved mockup", () => {
-    expect(autoImplementation.kicker).toBe("NOVA FEATURE");
+    expect(autoImplementation.kicker).toBe("Um ponto de partida para sua equipe");
     expect(autoImplementation.title).toBe("Auto Implantação");
     expect(autoImplementation.description).toContain(
-      "Implementação instantânea com MCP",
+      "pipeline, dashboard e automações prontos",
     );
     expect(autoImplementation.workspaceTitle).toBe(
       "Como você vai usar o pyper?",

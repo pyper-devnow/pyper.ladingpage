@@ -177,7 +177,7 @@ export function KanbanWorkspaceClient({
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                 <FileText size={16} color="var(--muted-strong)" />
                 <h3 style={{ fontSize: '14px', margin: 0, color: 'var(--muted-strong)' }}>FORM [{selectedCard.id}]</h3>
-                <span style={{ color: 'var(--muted)' }}>✎</span>
+                <span style={{ color: 'var(--muted-foreground)' }}>✎</span>
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
                 <button style={{ display: 'flex', alignItems: 'center', gap: '6px', background: 'transparent', border: 'none', fontSize: '13px', fontWeight: 'bold', cursor: 'pointer' }}>
@@ -225,9 +225,9 @@ export function KanbanWorkspaceClient({
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'white', borderRadius: '6px', padding: '12px', border: '1px solid #bfdbfe' }}>
                     <div>
-                      <div style={{ fontSize: '11px', color: 'var(--muted)', marginBottom: '4px' }}>Cliente</div>
+                      <div style={{ fontSize: '11px', color: 'var(--muted-foreground)', marginBottom: '4px' }}>Cliente</div>
                       <div style={{ fontSize: '13px', fontWeight: 'bold' }}>{selectedCard.name.split(' | ')[0]}</div>
-                      <div style={{ fontSize: '11px', color: 'var(--muted)', marginTop: '4px' }}>Telefone</div>
+                      <div style={{ fontSize: '11px', color: 'var(--muted-foreground)', marginTop: '4px' }}>Telefone</div>
                       <div style={{ fontSize: '13px' }}>{getPhoneForCard(selectedCard.id)}</div>
                     </div>
                     <button style={{ background: '#3b82f6', color: 'white', border: 'none', borderRadius: '24px', padding: '6px 16px', fontSize: '13px', fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px' }}>
@@ -267,12 +267,12 @@ export function KanbanWorkspaceClient({
               <div className="modal-sidebar">
                 {/* Status Box */}
                 <div style={{ background: 'white', borderRadius: '8px', border: '1px solid var(--border)', padding: '16px' }}>
-                  <div style={{ fontSize: '12px', color: 'var(--muted)', marginBottom: '8px' }}>Status</div>
+                  <div style={{ fontSize: '12px', color: 'var(--muted-foreground)', marginBottom: '8px' }}>Status</div>
                   <div style={{ display: 'inline-flex', alignItems: 'center', background: '#f8faf9', border: '1px solid var(--border)', padding: '4px 8px', borderRadius: '16px', fontSize: '11px', fontWeight: '800', color: 'var(--muted-strong)' }}>
                     PROSPECT INBOUND
                   </div>
                   
-                  <div style={{ fontSize: '12px', color: 'var(--muted)', marginTop: '16px', marginBottom: '8px' }}>Prioridade</div>
+                  <div style={{ fontSize: '12px', color: 'var(--muted-foreground)', marginTop: '16px', marginBottom: '8px' }}>Prioridade</div>
                   <div style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', color: '#3b82f6', fontSize: '12px', fontWeight: 'bold' }}>
                     <AlertTriangle size={14} /> BAIXO
                   </div>
@@ -283,7 +283,7 @@ export function KanbanWorkspaceClient({
                   <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '13px', fontWeight: 'bold', marginBottom: '12px' }}>
                     <Clock size={14} /> Entrega
                   </div>
-                  <div style={{ border: '1px dashed var(--border)', borderRadius: '6px', padding: '8px', textAlign: 'center', fontSize: '12px', color: 'var(--muted)', cursor: 'pointer' }}>
+                  <div style={{ border: '1px dashed var(--border)', borderRadius: '6px', padding: '8px', textAlign: 'center', fontSize: '12px', color: 'var(--muted-foreground)', cursor: 'pointer' }}>
                     <Clock size={12} style={{ display: 'inline-block', marginRight: '4px', verticalAlign: 'middle' }}/>
                     Selecionar data
                   </div>
@@ -295,7 +295,7 @@ export function KanbanWorkspaceClient({
                     <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '13px', fontWeight: 'bold' }}>
                       <AlarmClock size={14} color="#3b82f6" /> Tempo
                     </div>
-                    <span style={{ fontSize: '11px', color: 'var(--muted)' }}>Manual</span>
+                    <span style={{ fontSize: '11px', color: 'var(--muted-foreground)' }}>Manual</span>
                   </div>
                   <div style={{ display: 'flex', gap: '8px' }}>
                     <div style={{ flex: 1, background: '#f9fafa', border: '1px solid var(--border)', borderRadius: '6px', padding: '8px', textAlign: 'center', fontSize: '14px', fontFamily: 'monospace' }}>
@@ -316,7 +316,7 @@ export function KanbanWorkspaceClient({
                     <span style={{ background: '#fef08a', color: '#854d0e', padding: '2px 8px', borderRadius: '12px', fontSize: '11px', fontWeight: 'bold' }}>Agendar De... ×</span>
                     <span style={{ background: '#dbeafe', color: '#1e40af', padding: '2px 8px', borderRadius: '12px', fontSize: '11px', fontWeight: 'bold' }}>SITE PRINC... ×</span>
                   </div>
-                  <div style={{ border: '1px solid var(--border)', borderRadius: '6px', padding: '8px', fontSize: '12px', color: 'var(--muted)' }}>
+                  <div style={{ border: '1px solid var(--border)', borderRadius: '6px', padding: '8px', fontSize: '12px', color: 'var(--muted-foreground)' }}>
                     Adicionar tag +
                   </div>
                   
@@ -325,9 +325,9 @@ export function KanbanWorkspaceClient({
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '12px', marginBottom: '12px' }}>
                     <span style={{ background: '#e0e7ff', color: '#3730a3', borderRadius: '50%', width: '20px', height: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '10px', fontWeight: 'bold' }}>P</span>
-                    Pedro Roger <span style={{ color: 'var(--muted)', marginLeft: 'auto' }}>×</span>
+                    Pedro Roger <span style={{ color: 'var(--muted-foreground)', marginLeft: 'auto' }}>×</span>
                   </div>
-                  <div style={{ border: '1px solid var(--border)', borderRadius: '6px', padding: '8px', fontSize: '12px', color: 'var(--muted)' }}>
+                  <div style={{ border: '1px solid var(--border)', borderRadius: '6px', padding: '8px', fontSize: '12px', color: 'var(--muted-foreground)' }}>
                     Adicionar usuário ⌄
                   </div>
                 </div>

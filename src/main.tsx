@@ -6,9 +6,7 @@ import { initAnalytics } from "./lib/analytics";
 import { applyCachedContent, loadRemoteContent } from "./lib/remote-content";
 import "./globals.css";
 
-// Import fonts
-import "@fontsource/geist-sans";
-import "@fontsource/geist-mono";
+// Typography follows the platform: Inter with the same system fallbacks.
 
 initAnalytics();
 

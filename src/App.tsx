@@ -6,33 +6,25 @@ import {
   BellRing,
   Bot,
   ShieldCheck,
-  Scale,
-  FileText,
   CheckCircle2,
   Sparkles,
-  QrCode,
   CheckSquare,
   CheckCheck,
   Clock3,
   CreditCard,
-  Home as HomeIcon,
   LayoutGrid,
   MessageCircle,
-  Paperclip,
   Plus,
   Search,
-  Send,
-  Smile,
   Split,
   ShoppingCart,
-  User,
-  Filter,
-  BookOpen,
   Workflow,
   Zap,
   type LucideIcon,
 } from "lucide-react";
 import {
+  aiMcp,
+  servicePreview,
   autoImplementation,
   automationFlows,
   buildWhatsAppUrl,
@@ -42,7 +34,7 @@ import {
   hero,
   heroDashboard,
   jsonLdGraph,
-  metrics,
+  landingCopy,
   painPoints,
   pipelineStages,
   productShowcases,
@@ -79,94 +71,6 @@ const iconMap = {
   scatter: Split,
   workflow: Workflow,
 } satisfies Record<string, LucideIcon>;
-
-const contacts = [
-  {
-    name: "Mariana Silva | TechStore",
-    preview: "pode sim",
-    time: "17:50",
-    badge: null,
-    active: true,
-    initials: "MS",
-    agent: "RAUL RENNER",
-  },
-  {
-    name: "Logística Express",
-    preview: "Você: combinado!!",
-    time: "17:24",
-    badge: null,
-    active: false,
-    initials: "LE",
-    agent: "RAUL RENNER",
-  },
-  {
-    name: "11988887777",
-    preview: "Bom dia, gostaria de ver as...",
-    time: "16:49",
-    badge: "1",
-    active: false,
-    initials: "11",
-    agent: "RAUL RENNER",
-  },
-] as const;
-
-const messages = [
-  {
-    body: "Boa Tarde tudo bem Mariana ? me Chamo João sou da equipe comercial",
-    time: "14:09",
-    direction: "sent",
-  },
-  {
-    body: "quero um momento pra conversar contigo sobre as novas funcionalidades que temos no sistema e as que estão por vir",
-    time: "14:09",
-    direction: "sent",
-  },
-  {
-    body: "oi João! bora! vou salvar esse teu contato que eu ainda nao tenho...",
-    time: "14:10",
-    direction: "received",
-  },
-  {
-    body: "essa semana da bom sim",
-    time: "14:10",
-    direction: "received",
-  },
-  {
-    body: "Esse aqui é contato Oficial da nossa equipe",
-    time: "14:11",
-    direction: "sent",
-  },
-  {
-    body: "show qual o melhor dia",
-    time: "14:11",
-    direction: "sent",
-  },
-  {
-    body: "la pra quinta",
-    time: "16:52",
-    direction: "received",
-  },
-  {
-    body: "de manha da bom",
-    time: "16:52",
-    direction: "received",
-  },
-  {
-    body: "umas 10h ou 11h",
-    time: "16:52",
-    direction: "received",
-  },
-  {
-    body: "posso marcar esse email mariana@techstore.com.br no google agenda ? para as 10 horas",
-    time: "17:22",
-    direction: "sent",
-  },
-  {
-    body: "pode sim",
-    time: "17:50",
-    direction: "received",
-  },
-] as const;
 
 const kanbanCards = [
   {
@@ -227,6 +131,10 @@ function TypewriterInput() {
   const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setCurrentText(words[0]);
+      return;
+    }
     let timer: NodeJS.Timeout;
     const fullText = words[currentWordIndex];
     const typeSpeed = isDeleting ? 30 : 65;
@@ -384,179 +292,38 @@ function ProspectInteligenteSection() {
   );
 }
 
-function InteligenciaDadosSection() {
+function AiMcpSection() {
   return (
-    <section className="section inteligencia-dados-section" id="inteligencia-dados">
-      <div className="site-shell data-enrichment-layout">
-        {/* Left Copy Content */}
-        <div className="data-copy-container">
-          <p className="feature-pill blue">Inteligência de Dados</p>
-          <h2 className="data-title">Enriquecimento de Dados e Aquecimento de Leads</h2>
-          <p className="data-description">
-            Saiba com quem você está falando antes mesmo do primeiro "Oi". Integramos
-            nativamente com Serasa e JusBrasil para trazer segurança jurídica e financeira para
-            cada negociação.
-          </p>
-
-          <div className="integration-cards-row">
-            <div className="integration-mini-card">
-              <span className="integration-icon serasa">
-                <ShieldCheck size={20} />
-              </span>
-              <div>
-                <h3>Serasa Experian</h3>
-                <p>Score de crédito e saúde financeira em tempo real.</p>
-              </div>
-            </div>
-            <div className="integration-mini-card">
-              <span className="integration-icon jusbrasil">
-                <Scale size={20} />
-              </span>
-              <div>
-                <h3>JusBrasil</h3>
-                <p>Monitoramento de processos e histórico jurídico.</p>
-              </div>
-            </div>
-          </div>
+    <section className="section ai-mcp-section" id="ia-mcp" aria-labelledby="ia-mcp-title">
+      <div className="site-shell ai-mcp-layout">
+        <div className="ai-mcp-copy">
+          <p className="section-kicker">{aiMcp.kicker}</p>
+          <h2 className="section-title" id="ia-mcp-title">{aiMcp.title}</h2>
+          <p className="section-copy">{aiMcp.description}</p>
+          <ul className="ai-mcp-benefits">
+            {aiMcp.benefits.map(item => <li key={item}><CheckCircle2 size={18} aria-hidden="true" /><span>{item}</span></li>)}
+          </ul>
+          <a className="button button-primary" href={buildWhatsAppUrl()}>{aiMcp.cta}<ArrowRight size={18} aria-hidden="true" /></a>
         </div>
-
-        {/* Right Visual Card Mockup */}
-        <div className="data-mockup-container">
-          <div className="data-enrichment-card">
-            {/* Header */}
-            <div className="data-card-header">
-              <div className="data-lead-avatar">V</div>
-              <div className="data-lead-meta">
-                <strong className="data-lead-name">Vanguard Engenharia</strong>
-                <span className="data-lead-cnpj">CNPJ: 00.123.456/0001-99</span>
-              </div>
-              <span className="data-hot-badge">LEAD QUENTE</span>
-            </div>
-
-            {/* Financial Health Section */}
-            <div className="data-card-block">
-              <div className="data-block-header">
-                <span className="data-block-title">SAÚDE FINANCEIRA (SERASA)</span>
-                <span className="data-score-value">842</span>
-              </div>
-              <div className="data-indicators-grid">
-                <div className="data-indicator">
-                  <span className="data-indicator-label">Risco de Inadimplência</span>
-                  <span className="data-indicator-value">
-                    <span className="status-dot-indicator green" /> Baixo
-                  </span>
-                </div>
-                <div className="data-indicator">
-                  <span className="data-indicator-label">Capacidade Pgto.</span>
-                  <span className="data-indicator-value">
-                    <span className="status-dot-indicator blue" /> Alta
-                  </span>
-                </div>
-                <div className="data-indicator">
-                  <span className="data-indicator-label">Protestos (12m)</span>
-                  <strong className="data-indicator-value dark">0 ocorrências</strong>
-                </div>
-              </div>
-            </div>
-
-            {/* Legal Situation Section */}
-            <div className="data-card-block last">
-              <span className="data-block-title">SITUAÇÃO JURÍDICA (JUSBRASIL)</span>
-              <div className="data-legal-box">
-                <div className="data-legal-row">
-                  <div className="data-legal-type">
-                    <FileText size={16} className="data-legal-icon" />
-                    <span>Processos Ativos</span>
-                  </div>
-                  <strong className="data-legal-count">02</strong>
-                </div>
-                <div className="data-progress-bar-wrapper">
-                  <div className="data-progress-bar-track">
-                    <div className="data-progress-bar-fill" style={{ width: "20%" }} />
-                  </div>
-                  <div className="data-progress-labels">
-                    <span>Risco Processual Mínimo</span>
-                    <span>Certidão Negativa: Válida</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Floating Check Card */}
-            <div className="data-floating-validation">
-              <ShieldCheck size={16} className="data-validation-icon" />
-              <span>Venda Segura Liberada</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function FeaturesDashboardSection() {
-  const whatsappUrl = buildWhatsAppUrl();
-  return (
-    <section className="section dashboard-overview-section" id="visao-geral">
-      <div className="site-shell hero-grid">
-        {/* Left Copy Content */}
-        <div className="hero-copy">
-          <p className="eyebrow">
-            <span className="status-dot" aria-hidden="true" />
-            {hero.eyebrow}
-          </p>
-          <h2 className="hero-title" style={{ fontSize: "clamp(30px, 3.5vw, 48px)", lineHeight: 1.15 }}>
-            {hero.title}
-          </h2>
-          <p className="hero-subtitle">{hero.subtitle}</p>
-
-          <div className="cta-row">
-            <a className="button button-primary" href={whatsappUrl}>
-              {hero.primaryCta}
-              <ArrowRight size={18} aria-hidden="true" />
-            </a>
-            <a className="button button-secondary" href="#solucoes">
-              <LayoutGrid size={18} aria-hidden="true" />
-              {hero.secondaryCta}
-            </a>
-          </div>
-
-          <div className="hero-metrics" aria-label="Resumo de benefícios">
-            {metrics.map((metric) => (
-              <div className="metric" key={metric.label}>
-                <strong>{metric.value}</strong>
-                <span>{metric.label}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Right Product Graphic (Dashboard Mockup) */}
-        <figure className="hero-product" aria-label="Interface da Pyper">
-          <div className="hero-product-frame">
-            <img
-              className="hero-dashboard-image"
-              src={heroDashboard.src}
-              alt={heroDashboard.alt}
-              width={heroDashboard.width}
-              height={heroDashboard.height}
-              sizes="(max-width: 980px) 100vw, 68vw"
-            />
-          </div>
-          <figcaption className="hero-floating-card">
-            <strong>Lead qualificado automaticamente</strong>
-          </figcaption>
+        <figure className="ai-mcp-demo">
+          <figcaption><span><Bot size={20} aria-hidden="true" />{aiMcp.demoTitle}</span><small>{aiMcp.demoLabel}</small></figcaption>
+          <p className="ai-mcp-request">{aiMcp.request}</p>
+          <ol className="ai-mcp-steps">
+            {aiMcp.steps.map(step => <li key={step.title}><CheckCircle2 size={18} aria-hidden="true" /><div><strong>{step.title}</strong><p>{step.text}</p></div></li>)}
+          </ol>
+          <div className="ai-mcp-result"><Bot size={20} aria-hidden="true" /><p>{aiMcp.result}</p></div>
+          <p className="ai-mcp-control"><ShieldCheck size={16} aria-hidden="true" />{aiMcp.control}</p>
         </figure>
       </div>
     </section>
   );
 }
 
-
 export default function Home() {
   const whatsappUrl = buildWhatsAppUrl();
   const jsonLd = JSON.stringify(jsonLdGraph).replace(/</g, "\\u003c");
   const year = new Date().getFullYear();
+  const [productView, setProductView] = useState(1);
 
   return (
     <>
@@ -579,12 +346,11 @@ export default function Home() {
           </a>
 
           <nav className="desktop-nav" aria-label="Seções da página">
+            <a href="#ia-mcp">IA e MCP</a>
             <a href="#solucoes">Soluções</a>
-            <a href="#funcionalidades">Funcionalidades</a>
             <a href="#auto-implantacao">Auto Implantação</a>
             <a href="#faq">FAQ</a>
             <a href={supportUrl} target="_blank" rel="noopener noreferrer">Suporte</a>
-            <a href="https://www.instagram.com/pyper_crm" target="_blank" rel="noopener noreferrer">Instagram</a>
           </nav>
 
           <div className="nav-actions">
@@ -592,182 +358,36 @@ export default function Home() {
               Login
             </a>
             <a className="button button-primary" href={whatsappUrl}>
-              Começar Agora
+              {hero.primaryCta}
             </a>
           </div>
         </div>
       </header>
 
-      <nav className="mobile-dock" aria-label="Navegação mobile">
-        <a href="#inicio">
-          <HomeIcon size={20} aria-hidden="true" />
-          Início
-        </a>
-        <a href="#solucoes">
-          <Workflow size={20} aria-hidden="true" />
-          Recursos
-        </a>
-        <a href="#faq">
-          <CreditCard size={20} aria-hidden="true" />
-          FAQ
-        </a>
-        <a href={whatsappUrl}>
-          <MessageCircle size={20} aria-hidden="true" />
-          WhatsApp
-        </a>
-      </nav>
-
       <main className="page-main">
-        <section className="hero" id="inicio">
-          <div className="site-shell hero-grid setup-layout">
-            {/* Left Visual Setup Collage Mockup */}
-            <div className="setup-mockup-container">
-              <div className="setup-collage-backdrop" />
-              
-              <div className="setup-collage-wrapper">
-                
-                {/* Left Layer: Stats / Conversion Card */}
-                <div className="collage-card stats-card">
-                  <span className="stats-kicker">Conversão de Leads</span>
-                  <strong className="stats-value">+142%</strong>
-                  <div className="mini-chart">
-                    <span className="bar" style={{ height: "40%" }} />
-                    <span className="bar" style={{ height: "65%" }} />
-                    <span className="bar active" style={{ height: "90%" }} />
-                  </div>
-                </div>
-
-                {/* Center Layer: Lead Table Board */}
-                <div className="collage-card board-card">
-                  <header className="board-header">
-                    <span className="board-dot" />
-                    <span className="board-title">Atendimentos Recentes</span>
-                  </header>
-                  <div className="board-table">
-                    <div className="board-row header">
-                      <span>Lead</span>
-                      <span>Canal</span>
-                      <span>Status</span>
-                    </div>
-                    <div className="board-row">
-                      <div className="board-lead-cell">
-                        <span className="avatar-small gray">MS</span>
-                        <strong>Mariana Silva</strong>
-                      </div>
-                      <span className="board-channel-badge">WhatsApp</span>
-                      <span className="status-pill green">Resolvido</span>
-                    </div>
-                    <div className="board-row">
-                      <div className="board-lead-cell">
-                        <span className="avatar-small blue">VE</span>
-                        <strong>Vanguard Eng.</strong>
-                      </div>
-                      <span className="board-channel-badge">WhatsApp</span>
-                      <span className="status-pill orange">Em andamento</span>
-                    </div>
-                    <div className="board-row">
-                      <div className="board-lead-cell">
-                        <span className="avatar-small purple">EF</span>
-                        <strong>Estrutura Forte</strong>
-                      </div>
-                      <span className="board-channel-badge">WhatsApp</span>
-                      <span className="status-pill green">Resolvido</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Right Layer: Automation Recipe Card */}
-                <div className="collage-card automation-card">
-                  <header className="automation-header">
-                    <Zap size={14} className="automation-bolt-icon" />
-                    <span>Automação Ativa</span>
-                  </header>
-                  <p className="automation-recipe">
-                    Quando <strong>Mensagem Recebida</strong>, responder com <strong>Agente de IA</strong>.
-                  </p>
-                  <div className="automation-footer">
-                    <span className="status-active-tag">
-                      <span className="pulse-green-dot" />
-                      Ativo 24h
-                    </span>
-                  </div>
-                </div>
-
-                {/* Floating Integrations */}
-                <div className="floating-integrations">
-                  <div className="integration-bubble wpp">
-                    <MessageCircle size={16} />
-                  </div>
-                  <div className="integration-bubble stripe">
-                    <CreditCard size={16} />
-                  </div>
-                  <div className="integration-bubble gmail">
-                    <Send size={14} />
-                  </div>
-                </div>
-
+        <section className="hero product-first-hero" id="inicio">
+          <div className="site-shell">
+            <div className="hero-intro">
+              <p className="hero-category"><span className="status-dot" aria-hidden="true" />{hero.eyebrow}</p>
+              <h1>{landingCopy.headline}{" "}<span>{landingCopy.headlineAccent}</span></h1>
+              <p className="hero-description">{hero.subtitle}</p>
+              <div className="cta-row centered">
+                <a className="button button-primary" href={whatsappUrl}>{hero.primaryCta}<ArrowRight size={18} aria-hidden="true" /></a>
+                <a className="button button-secondary" href="#solucoes">{hero.secondaryCta}<ArrowRight size={18} aria-hidden="true" /></a>
               </div>
+              <p className="hero-note">{landingCopy.demoNote}</p>
             </div>
-
-            {/* Right Copy Content */}
-            <div className="setup-copy-container hero-copy">
-              <h1 className="hero-title">
-                Seu negócio funcionando 24h.
-                <br />
-                <span>Configurado em minutos.</span>
-              </h1>
-              <p className="hero-subtitle">
-                Conecte seu WhatsApp escaneando um QR Code, ative o agente de IA para sua empresa e defina
-                seu funil comercial em poucos cliques. Sem código, sem estresse.
-              </p>
-
-              <div className="cta-row">
-                <a className="button button-primary" href={whatsappUrl}>
-                  Começar Agora
-                  <ArrowRight size={18} aria-hidden="true" />
-                </a>
-                <a className="button button-secondary" href="#solucoes">
-                  <LayoutGrid size={18} aria-hidden="true" />
-                  Ver como funciona
-                </a>
-              </div>
-
-              <div className="setup-advantages hero-advantages" style={{ marginTop: "28px" }}>
-                <div className="advantage-row">
-                  <span className="advantage-icon">
-                    <QrCode size={16} />
-                  </span>
-                  <div>
-                    <strong>Conexão Plug & Play</strong>
-                    <p>Escaneie o QR Code e comece. Sem burocracia ou APIs complexas.</p>
-                  </div>
-                </div>
-
-                <div className="advantage-row">
-                  <span className="advantage-icon">
-                    <Clock3 size={16} />
-                  </span>
-                  <div>
-                    <strong>Operação 24 Horas por Dia</strong>
-                    <p>IA que atende na hora, qualifica leads e agenda reuniões.</p>
-                  </div>
-                </div>
-
-                <div className="advantage-row">
-                  <span className="advantage-icon">
-                    <LayoutGrid size={16} />
-                  </span>
-                  <div>
-                    <strong>Automação Sem Código</strong>
-                    <p>Crie fluxos de atendimento de forma visual e simples.</p>
-                  </div>
-                </div>
-              </div>
+            <figure className="product-preview" id="visao-geral">
+              <div className="preview-toolbar"><span className="preview-brand">pyper<span> / </span>{landingCopy.previewTitle}</span><span className="preview-label">{landingCopy.previewLabel}</span></div>
+              <img src={heroDashboard.src} alt={heroDashboard.alt} width={heroDashboard.width} height={heroDashboard.height} fetchPriority="high" />
+            </figure>
+            <div className="product-journey" aria-label={landingCopy.journeyLabel}>
+              {landingCopy.journey.map((item, index) => <div key={item}><CheckCircle2 size={18} aria-hidden="true" /><span>{item}</span>{index < landingCopy.journey.length - 1 && <ArrowRight className="journey-arrow" size={16} aria-hidden="true" />}</div>)}
             </div>
           </div>
         </section>
 
-        <FeaturesDashboardSection />
+        <AiMcpSection />
 
         <section className="section auto-implementation" id="auto-implantacao">
           <div className="site-shell auto-implementation-layout">
@@ -814,10 +434,6 @@ export default function Home() {
           </div>
         </section>
 
-        <ProspectInteligenteSection />
-
-        <InteligenciaDadosSection />
-
         <section className="section solution-section" id="solucoes">
           <div className="site-shell">
             <div className="section-heading">
@@ -830,14 +446,21 @@ export default function Home() {
             </div>
 
             <div className="product-stack">
+              <div className="product-selector" role="group" aria-label={landingCopy.productSelectorLabel}>
+                {landingCopy.productViews.map((label, index) => <button key={label} type="button" aria-pressed={productView === index} aria-controls="product-demo" onClick={() => setProductView(index)}>{label}</button>)}
+              </div>
+              <div id="product-demo">
+              {productView === 0 && (
               <ProductPanel
                 title={productShowcases[0].title}
                 text={productShowcases[0].text}
                 icon={MessageCircle}
                 tone="green"
               >
-                <WhatsAppWorkspace />
+                <ServiceWorkspace />
               </ProductPanel>
+              )}
+              {productView === 1 && (
 
               <ProductPanel
                 title={productShowcases[1].title}
@@ -847,8 +470,10 @@ export default function Home() {
               >
                 <KanbanWorkspaceClient pipelineStages={pipelineStages} kanbanCards={kanbanCards} />
               </ProductPanel>
+              )}
+              {productView === 2 && (
 
-              <div className="automation-section-wrapper" style={{ marginTop: "48px" }}>
+              <div className="automation-section-wrapper">
                 <div style={{ textAlign: "center", marginBottom: "32px" }}>
                   <h3 style={{ fontSize: "24px", fontWeight: "760", color: "var(--foreground)", letterSpacing: "-0.02em" }}>
                     Crie sua própria automação e seu Agente de forma simplificada
@@ -860,9 +485,14 @@ export default function Home() {
                   ))}
                 </div>
               </div>
+              )}
+              </div>
             </div>
           </div>
         </section>
+
+        <ProspectInteligenteSection />
+
 
         <section className="trust-strip" aria-label="Mensagem de valor">
           <div className="glass-panel trust-pill">
@@ -942,9 +572,7 @@ export default function Home() {
                 height={siteConfig.logo.height}
               />
               <h2>
-                Pronto para organizar seu WhatsApp,
-                <br />
-                seu CRM e seus processos em um só lugar?
+                {landingCopy.finalTitle}
               </h2>
               <p>
                 Fale com a gente pelo WhatsApp e veja como a Pyper entra na sua
@@ -952,7 +580,7 @@ export default function Home() {
               </p>
               <div className="cta-row centered">
                 <a className="button button-primary" href={whatsappUrl}>
-                  Começar Agora
+                  {hero.primaryCta}
                   <ArrowRight size={18} aria-hidden="true" />
                 </a>
                 <a className="button button-secondary" href="#solucoes">
@@ -999,13 +627,7 @@ export default function Home() {
         </div>
       </footer>
 
-      <a
-        className="floating-whatsapp"
-        href={whatsappUrl}
-        aria-label="Fale com a Pyper no WhatsApp"
-      >
-        <MessageCircle size={24} aria-hidden="true" />
-      </a>
+
     </>
   );
 }
@@ -1143,143 +765,25 @@ function ProductPanel({
   );
 }
 
-function WhatsAppWorkspace() {
+function ServiceWorkspace() {
   return (
-    <div className="whatsapp-workspace">
-      <aside className="chat-sidebar" aria-label="Lista de conversas">
-        <div className="chat-search">
-          <Search size={15} aria-hidden="true" />
-          <span>Buscar conversas...</span>
-        </div>
-        <div className="chat-filters">
-          <span>Todos <b>12</b></span>
-          <span>Meus <b>4</b></span>
-          <span>Aguardando <Filter size={12} style={{marginLeft: 4, display: 'inline-block', verticalAlign: 'middle'}}/></span>
-        </div>
-
-        <div className="contact-list">
-          {contacts.map((contact) => (
-            <article
-              className={`contact-card ${contact.active ? "active" : ""}`}
-              key={contact.name}
-            >
-              <span className="avatar">{contact.initials}</span>
-              <div>
-                <div className="contact-head">
-                  <strong>{contact.name}</strong>
-                  <small>{contact.time}</small>
-                </div>
-                <p>{contact.preview}</p>
-                <div className="contact-agent" style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '9px', fontWeight: 'bold', color: 'var(--primary)', marginTop: '4px' }}>
-                  <User size={10} /> PYPER AI
-                </div>
-              </div>
-              {contact.badge ? <b className="message-badge">{contact.badge}</b> : null}
-            </article>
-          ))}
-        </div>
-      </aside>
-
-      <section className="chat-main" aria-label="Prévia de conversa">
-        <header className="chat-header">
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <span className="avatar online" style={{ background: '#e0e7ff', color: '#3730a3' }}>MS</span>
-            <div>
-              <strong>Mariana Silva | TechStore</strong>
-              <p style={{ display: 'flex', alignItems: 'center', gap: '6px', flexWrap: 'wrap' }}>
-                <span style={{ color: 'var(--primary)' }}>● Online</span> · 558588006464
-                <span style={{ color: '#047857', background: '#d1fae5', padding: '2px 6px', borderRadius: '4px', fontSize: '10px', fontWeight: 'bold', marginLeft: '6px', display: 'inline-flex', alignItems: 'center' }}>
-                  <Bot size={10} style={{ marginRight: '4px' }}/>🤖 PYPER AI
-                </span>
-              </p>
-            </div>
-          </div>
-          <div className="chat-actions">
-            <button type="button" className="btn-icon-only">
-              <BookOpen size={14} aria-hidden="true" />
-            </button>
-            <button type="button">
-              Assumir
-            </button>
-            <button type="button">
-              Transferir
-            </button>
-            <button type="button" className="btn-danger">
-              Encerrar
-            </button>
-          </div>
-        </header>
-
-        <div className="message-canvas">
-          <span className="history-note">
-            Não há mais histórico, verifique no aparelho
-          </span>
-          {messages.map((message) => (
-            <article
-              className={`message-bubble ${message.direction}`}
-              key={`${message.time}-${message.body}`}
-            >
-              <p>{message.body}</p>
-              <time>{message.time}</time>
-              {message.direction === "sent" ? (
-                <CheckCheck size={13} aria-hidden="true" />
-              ) : null}
-            </article>
-          ))}
-          <div style={{ textAlign: 'center', margin: '8px 0' }}>
-            <span style={{ background: '#d1fae5', color: '#047857', fontSize: '11px', fontWeight: 'bold', padding: '4px 12px', borderRadius: '12px', border: '1px solid #a7f3d0' }}>
-               ✨ Atendimento Automático Ativo
-            </span>
-          </div>
-        </div>
-
-        <footer className="chat-input">
-          <Smile size={20} aria-hidden="true" />
-          <Paperclip size={20} aria-hidden="true" />
-          <span>Digite sua mensagem...</span>
-          <button type="button" aria-label="Enviar mensagem">
-            <Send size={16} aria-hidden="true" />
-          </button>
-        </footer>
-      </section>
-      
-      <aside className="chat-details">
-        <div className="chat-details-header">
-           <span className="avatar">MS</span>
-           <strong>Mariana Silva | TechStore</strong>
-        </div>
-        <div className="chat-details-body">
-           <div className="chat-details-label">E-MAIL</div>
-           <div className="chat-details-value">mariana@techstore.com.br</div>
-           
-           <div className="chat-details-label">CELULAR</div>
-           <div className="chat-details-value">558588006464</div>
-           
-           <div className="chat-details-row">
-             <span className="chat-details-label">TAREFAS RECENTES</span>
-             <span className="chat-details-link">Ver todas &gt;</span>
-           </div>
-           <div className="chat-details-box">
-             Nenhuma tarefa vinculada
-           </div>
-           
-           <div className="chat-details-row">
-             <span className="chat-details-label">ANOTAÇÕES</span>
-           </div>
-           <div className="chat-details-row" style={{ fontSize: '13px', fontWeight: 'bold', marginBottom: '12px' }}>
-             <span>📄 Notas Importantes</span>
-             <span className="chat-details-action-text">+ Nova</span>
-           </div>
-           <div className="chat-details-box large">
-             Nenhuma nota adicionada
-           </div>
-        </div>
-      </aside>
-    </div>
+    <figure className="service-workspace">
+      <figcaption className="service-toolbar"><span><LayoutGrid size={16} aria-hidden="true" />{servicePreview.workspace}</span><span>{servicePreview.example}</span></figcaption>
+      <div className="service-layout">
+        <aside className="service-context">
+          <span className="service-avatar" aria-hidden="true">MS</span>
+          <h4>{servicePreview.contact}</h4><p>{servicePreview.company}</p>
+          <dl>{servicePreview.fields.map(field => <div key={field.label}><dt>{field.label}</dt><dd>{field.value}</dd></div>)}</dl>
+        </aside>
+        <section className="service-activity" aria-label={servicePreview.title}>
+          <h4>{servicePreview.title}</h4>
+          <ol>{servicePreview.events.map(event => <li key={event.title}><span className="service-event-dot" aria-hidden="true" /><div><strong>{event.title}</strong><p>{event.text}</p></div><time>{event.time}</time></li>)}</ol>
+        </section>
+        <aside className="service-agent"><Bot size={24} aria-hidden="true" /><h4>{servicePreview.agentTitle}</h4><p>{servicePreview.agentText}</p><span><CheckCircle2 size={16} aria-hidden="true" />{servicePreview.agentStatus}</span></aside>
+      </div>
+    </figure>
   );
 }
-
-
 
 function AutomationFlowCard({
   flow,

@@ -8,11 +8,11 @@ export const siteConfig = {
   whatsappMessage: "Olá, quero agendar uma demonstração da Pyper.",
   email: "contato@pyper.com.br",
   logo: {
-    src: "/logo-pyper-wordmark.png",
-    schemaSrc: "/logo-pyper-official.png",
+    src: "/logo-pyper-crm-v2.png",
+    schemaSrc: "/logo-pyper-crm-v2.png",
     alt: "Logo da Pyper",
-    width: 920,
-    height: 320,
+    width: 1965,
+    height: 800,
   },
 } as const;
 
@@ -39,11 +39,11 @@ export const analytics = {
 } as const;
 
 export const hero = {
-  eyebrow: "CRM, WhatsApp e IA em uma operação só",
+  eyebrow: "Pyper · CRM e agentes de IA",
   title: "CRM com IA e WhatsApp para automatizar vendas.",
   subtitle:
-    "Centralize conversas, organize leads e coloque agentes de IA trabalhando com sua equipe.",
-  primaryCta: "Começar Agora",
+    "Organize sua operação comercial e coloque agentes de IA para trabalhar com sua equipe. Com MCP, eles consultam informações e executam ações autorizadas no CRM.",
+  primaryCta: "Agendar demonstração",
   secondaryCta: "Ver como funciona",
 } as const;
 
@@ -57,7 +57,7 @@ export const heroDashboard = {
 export const siteMetadata = {
   title: "Pyper | CRM com WhatsApp, Inteligência Artificial e Automação",
   description:
-    "Conheça o melhor CRM integrado com WhatsApp e Inteligência Artificial. Automatize o atendimento comercial, qualifique e enriqueça leads 24h por dia e multiplique suas vendas.",
+    "CRM integrado com WhatsApp e Inteligência Artificial. Conecte agentes de IA ao seu CRM via MCP para consultar leads, atualizar oportunidades e automatizar o atendimento.",
   keywords: [
     "CRM com WhatsApp",
     "CRM integrado com WhatsApp",
@@ -65,13 +65,13 @@ export const siteMetadata = {
     "chatbot IA para WhatsApp",
     "automação de vendas no WhatsApp",
     "qualificação de leads automática",
-    "enriquecimento de dados leads",
+    "agentes de IA com MCP",
     "CRM com IA",
     "automação comercial Brasil",
   ],
   openGraphTitle: "Pyper | CRM com WhatsApp, Inteligência Artificial e Automação",
   openGraphDescription:
-    "O melhor CRM integrado com WhatsApp e Inteligência Artificial. Automatize atendimentos, enriqueça dados de leads e venda 24h por dia com a Pyper.",
+    "CRM integrado com WhatsApp e Inteligência Artificial. Agentes de IA com MCP para consultar leads, atualizar oportunidades e apoiar sua equipe comercial.",
   imageAlt: "Dashboard da Pyper com CRM integrado ao WhatsApp e agentes de IA",
 } as const satisfies {
   title: string;
@@ -107,10 +107,10 @@ export const painPoints = [
 ] as const;
 
 export const autoImplementation = {
-  kicker: "NOVA FEATURE",
+  kicker: "Um ponto de partida para sua equipe",
   title: "Auto Implantação",
   description:
-    "Implementação instantânea com MCP. Comece a usar em minutos com nosso Motor de Configuração Preditiva (MCP), que oferece templates de automação baseados nos fluxos de sucesso dos nossos maiores clientes.",
+    "Escolha um modelo para vendas, atendimento ou pós-venda. Seu workspace começa com pipeline, dashboard e automações prontos para você adaptar à sua operação.",
   workspaceKicker: "Configure seu workspace",
   workspaceTitle: "Como você vai usar o pyper?",
   workspaceSubtitle:
@@ -388,4 +388,69 @@ export const jsonLdGraph = {
       })),
     },
   ],
+} as const;
+
+export const landingCopy = {
+  headline: "Seu CRM organiza.",
+  headlineAccent: "Sua IA faz acontecer.",
+  finalTitle: "Coloque seu CRM e sua IA para trabalhar juntos.",
+  assistantLabel: "Assistente Pyper",
+  menuLabel: "Menu de navegação",
+  loginLabel: "Entrar na Pyper",
+  navigation: [
+    { href: "#ia-mcp", label: "IA e MCP" },
+    { href: "#solucoes", label: "Soluções" },
+    { href: "#auto-implantacao", label: "Auto Implantação" },
+    { href: "#faq", label: "Perguntas frequentes" },
+  ],
+  demoNote: "Conheça a Pyper em uma demonstração com nossa equipe.",
+  previewTitle: "Sua operação comercial",
+  previewLabel: "Visão do produto",
+  journeyLabel: "Do primeiro contato ao fechamento",
+  journey: ["Organize sua operação", "Conecte agentes via MCP", "Acompanhe cada venda"],
+  productSelectorLabel: "Explore os recursos da Pyper",
+  productViews: ["Atendimento no WhatsApp", "Funil de vendas", "Agentes e automações"],
+} as const;
+
+export const aiMcp = {
+  kicker: "Inteligência artificial conectada via MCP",
+  title: "IA que conversa e age no seu CRM.",
+  description: "Com MCP, seus agentes acessam as ferramentas autorizadas da Pyper. A conversa ganha contexto e vira ação: consultar um lead, registrar uma oportunidade ou mover um negócio no funil.",
+  benefits: [
+    "Consulte leads, negócios e produtos durante o atendimento.",
+    "Crie oportunidades e atualize etapas com ferramentas do CRM.",
+    "Defina quais ferramentas cada agente pode usar.",
+  ],
+  cta: "Ver a IA em uma demonstração",
+  demoTitle: "Agente Pyper + MCP",
+  demoLabel: "Exemplo ilustrativo",
+  request: "Encontre o negócio da Mariana e mova para a etapa Proposta.",
+  steps: [
+    { title: "Consulta o contexto", text: "Localiza o lead e o negócio no CRM." },
+    { title: "Identifica a etapa", text: "Consulta as etapas disponíveis no funil." },
+    { title: "Executa a ação autorizada", text: "Move o negócio usando a ferramenta conectada." },
+  ],
+  result: "O negócio da Mariana foi movido para Proposta.",
+  control: "Ações conforme as permissões e ferramentas habilitadas para o agente.",
+} as const;
+
+export const servicePreview = {
+  workspace: "Pyper / Atendimento",
+  example: "Exemplo ilustrativo",
+  contact: "Mariana Silva",
+  company: "TechStore",
+  fields: [
+    { label: "Etapa do negócio", value: "Proposta" },
+    { label: "Responsável", value: "Equipe comercial" },
+    { label: "Canal de origem", value: "WhatsApp" },
+  ],
+  title: "Histórico do atendimento",
+  events: [
+    { title: "Interesse registrado", text: "Mariana quer conhecer a solução para sua equipe.", time: "10:02" },
+    { title: "Contexto consultado pela IA", text: "O agente localizou o cadastro e a oportunidade no CRM.", time: "10:03" },
+    { title: "Negócio atualizado", text: "A oportunidade avançou para a etapa Proposta.", time: "10:04" },
+  ],
+  agentTitle: "Agente de IA",
+  agentText: "Atendimento conectado ao contexto do cliente e às ferramentas do CRM.",
+  agentStatus: "Ferramentas via MCP",
 } as const;

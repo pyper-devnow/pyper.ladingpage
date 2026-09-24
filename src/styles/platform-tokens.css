@@ -1,0 +1,92 @@
+/* Generated from pyper.platform/src/features/appearance/theme.defaults.ts.
+ * Refresh with: node scripts/sync-platform-theme.mjs
+ * Committed locally so the landing builds independently of the platform.
+ */
+:root {
+  --background: oklch(0.985 0.003 255);
+  --foreground: oklch(0.22 0.02 255);
+  --card: oklch(0.998 0.001 255);
+  --card-foreground: oklch(0.22 0.02 255);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.22 0.02 255);
+  --primary: oklch(0.62 0.17 152);
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.95 0.006 255);
+  --secondary-foreground: oklch(0.25 0.02 255);
+  --muted: oklch(0.955 0.006 255);
+  --muted-foreground: oklch(0.5 0.02 255);
+  --accent: oklch(0.94 0.025 152);
+  --accent-foreground: oklch(0.35 0.08 152);
+  --destructive: oklch(0.6 0.22 25);
+  --destructive-foreground: oklch(0.99 0 0);
+  --success: oklch(0.62 0.16 155);
+  --success-foreground: oklch(0.99 0 0);
+  --warning: oklch(0.75 0.15 75);
+  --warning-foreground: oklch(0.28 0.05 75);
+  --whatsapp: oklch(0.62 0.17 152);
+  --whatsapp-foreground: oklch(0.99 0 0);
+  --whatsapp-bubble: oklch(0.9 0.06 152);
+  --chat-bg: oklch(0.97 0.01 150);
+  --border: oklch(0.88 0.008 255);
+  --input: oklch(0.835 0.01 255);
+  --ring: oklch(0.62 0.17 152);
+  --chart1: oklch(0.62 0.17 152);
+  --chart2: oklch(0.65 0.13 220);
+  --chart3: oklch(0.7 0.14 75);
+  --chart4: oklch(0.62 0.18 320);
+  --chart5: oklch(0.6 0.18 25);
+  --sidebar: oklch(0.975 0.004 255);
+  --sidebar-foreground: oklch(0.25 0.02 255);
+  --sidebar-primary: oklch(0.62 0.17 152);
+  --sidebar-primary-foreground: oklch(0.99 0 0);
+  --sidebar-accent: oklch(0.94 0.006 255);
+  --sidebar-accent-foreground: oklch(0.25 0.02 255);
+  --sidebar-border: oklch(0.87 0.008 255);
+  --sidebar-ring: oklch(0.62 0.17 152);
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --radius: 0.5rem;
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+.final-card {
+  --background: oklch(0.155 0.012 255);
+  --foreground: oklch(0.97 0.003 240);
+  --card: oklch(0.205 0.014 255);
+  --card-foreground: oklch(0.97 0.003 240);
+  --popover: oklch(0.205 0.014 255);
+  --popover-foreground: oklch(0.97 0.003 240);
+  --primary: oklch(0.7 0.17 152);
+  --primary-foreground: oklch(0.16 0.015 250);
+  --secondary: oklch(0.245 0.016 255);
+  --secondary-foreground: oklch(0.97 0.003 240);
+  --muted: oklch(0.235 0.014 255);
+  --muted-foreground: oklch(0.7 0.015 250);
+  --accent: oklch(0.285 0.045 152);
+  --accent-foreground: oklch(0.92 0.07 152);
+  --destructive: oklch(0.65 0.22 25);
+  --destructive-foreground: oklch(0.99 0 0);
+  --success: oklch(0.7 0.16 155);
+  --success-foreground: oklch(0.99 0 0);
+  --warning: oklch(0.78 0.15 75);
+  --warning-foreground: oklch(0.25 0.05 75);
+  --whatsapp: oklch(0.7 0.17 152);
+  --whatsapp-foreground: oklch(0.16 0.015 250);
+  --whatsapp-bubble: oklch(0.35 0.1 152);
+  --chat-bg: oklch(0.18 0.018 250);
+  --border: oklch(1 0 0 / 9%);
+  --input: oklch(1 0 0 / 13%);
+  --ring: oklch(0.7 0.17 152);
+  --chart1: oklch(0.72 0.17 152);
+  --chart2: oklch(0.65 0.13 220);
+  --chart3: oklch(0.75 0.14 75);
+  --chart4: oklch(0.65 0.18 320);
+  --chart5: oklch(0.6 0.18 25);
+  --sidebar: oklch(0.175 0.012 255);
+  --sidebar-foreground: oklch(0.97 0.003 240);
+  --sidebar-primary: oklch(0.7 0.17 152);
+  --sidebar-primary-foreground: oklch(0.99 0 0);
+  --sidebar-accent: oklch(0.24 0.014 255);
+  --sidebar-accent-foreground: oklch(0.97 0.003 240);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.7 0.17 152);
+}
