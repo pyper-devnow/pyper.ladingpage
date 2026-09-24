@@ -5,6 +5,12 @@
 // enquanto nenhum provedor estiver carregado.
 //
 // Para ligar GA4 ou Plausible, preencha `analytics` em src/lib/site.ts.
+//
+// À parte dos provedores, a própria Pyper conta visitas e cliques (pyper-metrics):
+// métrica anônima e agregada, enviada ao nosso backend e vista no Console.
+// Sem consentimento não há identificador persistente — só um id de sessão que
+// morre com a aba.
+import { initPyperMetrics } from "./pyper-metrics";
 import { analytics } from "./site";
 
 type Props = Record<string, string | number | boolean>;
@@ -85,7 +91,7 @@ function loadProviders() {
   if (plausibleDomain) loadPlausible(plausibleDomain);
 }
 
-function locationOf(el: Element): string {
+export function locationOf(el: Element): string {
   if (el.closest(".floating-whatsapp")) return "float";
   if (el.closest(".mobile-dock")) return "mobile-dock";
   if (el.closest(".site-header, header")) return "nav";
@@ -162,6 +168,8 @@ function renderConsentBanner() {
 
 /** Instala o rastreio de clique e carrega os provedores conforme o consentimento. */
 export function initAnalytics() {
+  initPyperMetrics();
+
   document.addEventListener(
     "click",
     (event) => {
