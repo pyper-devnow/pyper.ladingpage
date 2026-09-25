@@ -3631,3 +3631,68 @@ body { -webkit-font-smoothing: antialiased; text-rendering: geometricPrecision; 
   white-space: nowrap;
   border: 0;
 }
+
+/* Product examples use the current platform's fields and interactions. */
+.real-pipeline, .agent-tools-example { min-width: 0; background: var(--card); color: var(--foreground); text-align: left; }
+.example-toolbar { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; padding: 20px 24px; border-bottom: 1px solid var(--border); }
+.example-toolbar strong { font-size: 14px; }
+.example-toolbar p, .example-toolbar > span { margin: 5px 0 0; font-size: 12px; color: var(--muted-foreground); line-height: 1.5; }
+.example-toolbar button, .example-tool > button:last-child { display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--input); background: var(--card); color: var(--foreground); border-radius: var(--radius-md); padding: 10px 12px; min-height: 40px; cursor: pointer; font: inherit; font-size: 12px; }
+.real-board { display: grid; grid-template-columns: repeat(6, minmax(165px, 1fr)); gap: 12px; padding: 20px; overflow-x: auto; max-width: 100%; background: var(--background); }
+.real-column { min-width: 0; padding: 10px; background: var(--secondary); border-radius: var(--radius); }
+.real-column > header { display: flex; align-items: center; justify-content: space-between; gap: 6px; margin-bottom: 16px; font-size: 11px; }
+.real-column > header span { color: var(--muted-foreground); }
+.real-deal { width: 100%; display: flex; flex-direction: column; text-align: left; gap: 12px; padding: 14px 12px; margin-bottom: 10px; background: var(--card); color: var(--foreground); border: 1px solid var(--border); border-radius: var(--radius); cursor: pointer; }
+.real-deal[aria-pressed="true"] { border-color: var(--primary); }
+.real-deal strong { font-size: 13px; line-height: 1.5; }
+.real-deal b { font-size: 15px; font-weight: 600; }
+.real-contact, .real-next { font-size: 11px; color: var(--muted-foreground); line-height: 1.5; }
+.real-next { border-top: 1px solid var(--border); padding-top: 10px; }
+.example-empty { color: var(--muted-foreground); font-size: 11px; margin: 24px 0; }
+.real-deal-details { display: flex; flex-wrap: wrap; align-items: center; gap: 24px; padding: 24px; border-top: 1px solid var(--border); }
+.example-caption { font-size: 11px; color: var(--muted-foreground); }
+.real-deal-details h4 { margin: 6px 0; font-size: 15px; }
+.real-deal-details p { margin: 0; font-size: 12px; color: var(--muted-foreground); }
+.real-deal-details dl { display: flex; gap: 24px; margin: 0; }
+.real-deal-details dt { font-size: 11px; color: var(--muted-foreground); }
+.real-deal-details dd { font-size: 12px; margin: 6px 0 0; max-width: 240px; }
+.real-deal-details label { display: flex; flex-direction: column; gap: 8px; margin-left: auto; font-size: 12px; }
+.real-deal-details select { min-height: 44px; padding: 8px 12px; border: 1px solid var(--input); border-radius: var(--radius-md); background: var(--card); color: var(--foreground); font: inherit; }
+.example-feedback { display: flex; align-items: center; gap: 8px; padding: 16px 24px; margin: 0; border-top: 1px solid var(--border); font-size: 12px; color: var(--muted-foreground); line-height: 1.6; }
+.tools-instruction { padding: 16px 24px; margin: 0; font-size: 13px; line-height: 1.6; color: var(--muted-foreground); }
+.example-tool { display: grid; grid-template-columns: 24px minmax(0, 1fr) 44px auto; align-items: center; gap: 16px; padding: 20px 24px; border-top: 1px solid var(--border); }
+.example-tool strong { font-size: 14px; }
+.example-tool p { color: var(--muted-foreground); font-size: 13px; line-height: 1.6; margin: 6px 0 0; }
+.example-switch { display: flex; align-items: center; width: 44px; height: 44px; background: transparent; border: 0; position: relative; cursor: pointer; padding: 4px; }
+.example-switch::before { content: ""; position: absolute; inset: 11px 0; background: var(--muted-foreground); border-radius: 20px; }
+.example-switch[aria-checked="true"]::before { background: var(--action-background); }
+.example-switch span { z-index: 1; width: 16px; height: 16px; background: white; border-radius: 50%; transition: transform 150ms ease; }
+.example-switch[aria-checked="true"] span { transform: translateX(20px); }
+.tool-test-result { display: flex; gap: 12px; margin: 20px 24px; padding: 20px; background: var(--accent); color: var(--accent-foreground); border-radius: var(--radius); }
+.tool-test-result > svg { flex-shrink: 0; }
+.tool-test-result strong { font-size: 14px; }
+.tool-test-result p { font-size: 13px; line-height: 1.6; }
+.tool-test-result small { font-size: 11px; }
+.setup-real-steps { display: flex; flex-direction: column; gap: 0; max-width: 800px; width: 100%; margin: 0 auto; padding: 0; list-style: none; }
+.setup-real-steps li { display: flex; align-items: flex-start; gap: 24px; padding: 24px 0; border-top: 1px solid var(--border); }
+.setup-real-steps li > span { color: var(--primary); font-size: 24px; font-weight: 600; }
+.setup-real-steps h3 { font-size: 20px; margin: 0 0 8px; }
+.setup-real-steps p { color: var(--muted-foreground); margin: 0; line-height: 1.6; }
+.prospect-real-search { display: flex; align-items: center; gap: 12px; margin: 20px; border: 1px solid var(--input); border-radius: var(--radius-md); padding: 10px; }
+.prospect-real-search input { border: 0; outline-offset: 3px; background: transparent; color: var(--foreground); min-width: 0; width: 100%; font-size: 13px; }
+.prospect-real-search input::placeholder { color: var(--muted-foreground); }
+.prospect-reason { font-size: 12px; color: var(--muted-foreground); line-height: 1.5; margin: 8px 0 0; }
+.prospect-lead-actions { flex-wrap: wrap; }
+.prospect-crm-btn:disabled { cursor: default; }
+.product-stack, #product-demo, .product-panel, .hero-intro { min-width: 0; }
+#product-demo { min-height: 0; }
+@media (max-width: 600px) {
+  .example-toolbar, .example-tool, .real-deal-details { padding: 16px; }
+  .example-tool { grid-template-columns: minmax(0, 1fr) 44px auto; gap: 10px; }
+  .example-tool > svg { display: none; }
+  .real-deal-details label { width: 100%; margin-left: 0; }
+  .real-deal-details dl { flex-wrap: wrap; }
+  .prospect-lead-row { flex-wrap: wrap; gap: 14px; }
+  .prospect-lead-info { min-width: 0; }
+  .example-feedback svg { flex-shrink: 0; }
+}

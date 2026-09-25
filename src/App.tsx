@@ -1,5 +1,6 @@
 
-import { ReactNode, useState, useEffect } from "react";
+import { ReactNode, useState } from "react";
+import { AgentToolsExample } from "./components/AgentToolsExample";
 import { KanbanWorkspaceClient } from "./components/KanbanWorkspaceClient";
 import {
   ArrowRight,
@@ -8,40 +9,31 @@ import {
   ShieldCheck,
   CheckCircle2,
   Sparkles,
-  CheckSquare,
   CheckCheck,
   Clock3,
-  CreditCard,
   LayoutGrid,
   MessageCircle,
-  Plus,
   Search,
   Split,
-  ShoppingCart,
   Workflow,
-  Zap,
   type LucideIcon,
 } from "lucide-react";
 import {
   aiMcp,
-  servicePreview,
-  autoImplementation,
+  setupExample,
   automationFlows,
   buildWhatsAppUrl,
   capabilities,
   faqItems,
   faqSupport,
   hero,
-  heroDashboard,
   buildJsonLdGraph,
   landingCopy,
   painPoints,
-  pipelineStages,
   productShowcases,
   sectionCopy,
   siteConfig,
   supportUrl,
-  workspaceTemplates,
 } from "@/lib/site";
 
 const Instagram = ({ size = 24, ...props }: { size?: number; [key: string]: any }) => (
@@ -73,114 +65,17 @@ const iconMap = {
   workflow: Workflow,
 } satisfies Record<string, LucideIcon>;
 
-const kanbanCards = [
-  {
-    stage: "Prospectar",
-    id: "UPSC-69",
-    name: "Gráfica Rapidex",
-    tag: "Indicação",
-    meta: "33d",
-    tone: "blue",
-    featured: false,
-  },
-  {
-    stage: "Prospectar",
-    id: "UPSC-10",
-    name: "CHATBOT MAKER",
-    tag: "R$ 10.070,00",
-    meta: "33d",
-    tone: "green",
-    featured: false,
-  },
-  {
-    stage: "Qualificação",
-    id: "UPSC-124",
-    name: "Eduardo | RevSpot",
-    tag: "Agendar Demo",
-    meta: "13h",
-    tone: "purple",
-    featured: true,
-  },
-  {
-    stage: "Proposta",
-    id: "UPSC-80",
-    name: "LukTex",
-    tag: "QR_CODE",
-    meta: "102d",
-    tone: "cyan",
-    featured: false,
-  },
-  {
-    stage: "Fechamento",
-    id: "UPSC-46",
-    name: "Grandene",
-    tag: "Fechado",
-    meta: "Win",
-    tone: "green",
-    featured: false,
-  },
-] as const;
-
-function TypewriterInput() {
-  const words = sectionCopy.prospect.searches;
-  const [currentWordIndex, setCurrentWordIndex] = useState(0);
-  const [currentText, setCurrentText] = useState("");
-  const [isDeleting, setIsDeleting] = useState(false);
-
-  useEffect(() => {
-    if (typeof window.matchMedia === "function" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setCurrentText(words[0]);
-      return;
-    }
-    let timer: NodeJS.Timeout;
-    const fullText = words[currentWordIndex];
-    const typeSpeed = isDeleting ? 30 : 65;
-
-    const handleTyping = () => {
-      if (!isDeleting) {
-        setCurrentText((prev) => fullText.substring(0, prev.length + 1));
-        if (currentText === fullText) {
-          timer = setTimeout(() => setIsDeleting(true), 2500);
-          return;
-        }
-      } else {
-        setCurrentText((prev) => fullText.substring(0, prev.length - 1));
-        if (currentText === "") {
-          setIsDeleting(false);
-          setCurrentWordIndex((prev) => (prev + 1) % words.length);
-          return;
-        }
-      }
-      timer = setTimeout(handleTyping, typeSpeed);
-    };
-
-    timer = setTimeout(handleTyping, typeSpeed);
-    return () => clearTimeout(timer);
-  }, [currentText, isDeleting, currentWordIndex]);
-
-  return (
-    <div className="prospect-search-input-wrapper">
-      <Search size={16} className="prospect-search-icon" aria-hidden="true" />
-      <span className="prospect-typewriter-text">
-        {currentText}
-        <span className="prospect-typewriter-cursor">|</span>
-      </span>
-    </div>
-  );
-}
-
-
-
 function ProspectInteligenteSection() {
   const [addedLeads, setAddedLeads] = useState<string[]>([]);
+  const [query, setQuery] = useState("");
 
   const toggleLead = (id: string) => {
     setAddedLeads((prev) =>
-      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
+      prev.includes(id) ? prev : [...prev, id]
     );
   };
 
-  const leads = sectionCopy.prospect.leads;
+  const leads = sectionCopy.prospect.leads.filter(lead => `${lead.name} ${lead.sub}`.toLocaleLowerCase("pt-BR").includes(query.toLocaleLowerCase("pt-BR")));
 
   return (
     <section className="section prospect-inteligente-section" id="prospect-inteligente">
@@ -197,8 +92,10 @@ function ProspectInteligenteSection() {
             </div>
 
             {/* Typewriter Input */}
-            <TypewriterInput />
+            <label className="prospect-real-search"><Search size={16} aria-hidden="true" /><input aria-label={sectionCopy.prospect.searchLabel} placeholder={sectionCopy.prospect.searchLabel} value={query} onChange={event => setQuery(event.target.value)} /></label>
+            <p className="tools-instruction">{sectionCopy.prospect.demoNotice}</p>
 
+            {leads.length === 0 && <p className="tools-instruction" role="status">{sectionCopy.prospect.emptyLabel}</p>}
             {/* Leads List */}
             <div className="prospect-leads-list">
               {leads.map((lead) => {
@@ -208,6 +105,7 @@ function ProspectInteligenteSection() {
                     <div className="prospect-lead-info">
                       <strong className="prospect-lead-name">{lead.name}</strong>
                       <span className="prospect-lead-sub">{lead.sub}</span>
+                      <p className="prospect-reason">{lead.reason}</p>
                     </div>
                     <div className="prospect-lead-actions">
                       <span className="prospect-match-badge">
@@ -216,6 +114,7 @@ function ProspectInteligenteSection() {
                       </span>
                       <button
                         type="button"
+                        disabled={isAdded}
                         onClick={() => toggleLead(lead.id)}
                         className={`prospect-crm-btn ${isAdded ? "added" : ""}`}
                       >
@@ -344,7 +243,7 @@ export default function Home() {
             </div>
             <figure className="product-preview" id="visao-geral">
               <div className="preview-toolbar"><span className="preview-brand">pyper<span> / </span>{landingCopy.previewTitle}</span><span className="preview-label">{landingCopy.previewLabel}</span></div>
-              <img src={heroDashboard.src} srcSet={heroDashboard.srcSet} sizes={heroDashboard.sizes} alt={heroDashboard.alt} width={heroDashboard.width} height={heroDashboard.height} fetchPriority="high" decoding="async" />
+              <KanbanWorkspaceClient compact />
             </figure>
             <div className="product-journey" aria-label={landingCopy.journeyLabel}>
               {landingCopy.journey.map((item, index) => <div key={item}><CheckCircle2 size={18} aria-hidden="true" /><span>{item}</span>{index < landingCopy.journey.length - 1 && <ArrowRight className="journey-arrow" size={16} aria-hidden="true" />}</div>)}
@@ -357,12 +256,12 @@ export default function Home() {
         <section className="section auto-implementation" id="auto-implantacao">
           <div className="site-shell auto-implementation-layout">
             <div className="auto-implementation-copy">
-              <p className="feature-pill">{autoImplementation.kicker}</p>
-              <h2>{autoImplementation.title}</h2>
-              <p>{autoImplementation.description}</p>
+              <p className="feature-pill">{setupExample.kicker}</p>
+              <h2>{setupExample.title}</h2>
+              <p>{setupExample.description}</p>
             </div>
 
-            <WorkspaceBuilderMockup />
+            <ol className="setup-real-steps">{setupExample.steps.map((step, index) => <li key={step.title}><span>{index + 1}</span><div><h3>{step.title}</h3><p>{step.text}</p></div></li>)}</ol>
           </div>
         </section>
 
@@ -415,10 +314,10 @@ export default function Home() {
               <ProductPanel
                 title={productShowcases[0].title}
                 text={productShowcases[0].text}
-                icon={MessageCircle}
+                icon={Bot}
                 tone="green"
               >
-                <ServiceWorkspace />
+                <AgentToolsExample />
               </ProductPanel>
               )}
               {productView === 1 && (
@@ -429,7 +328,7 @@ export default function Home() {
                 icon={LayoutGrid}
                 tone="blue"
               >
-                <KanbanWorkspaceClient pipelineStages={pipelineStages} kanbanCards={kanbanCards} />
+                <KanbanWorkspaceClient />
               </ProductPanel>
               )}
               {productView === 2 && (
@@ -594,117 +493,6 @@ export default function Home() {
   );
 }
 
-const workspaceIconMap = {
-  cart: ShoppingCart,
-  support: MessageCircle,
-  followup: BellRing,
-} satisfies Record<string, LucideIcon>;
-
-const workspaceStatIconMap = {
-  automation: Zap,
-  pipeline: LayoutGrid,
-  widgets: CreditCard,
-} satisfies Record<string, LucideIcon>;
-
-/** Destaca palavras dentro de um texto editável, sem exigir HTML no Console. */
-function emphasize(text: string, words: string[], tag: "span" | "strong"): ReactNode[] {
-  const escaped = words.map((word) => word.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
-  const pattern = new RegExp(`(${escaped.join("|")})`, "g");
-  const Tag = tag;
-  return text.split(pattern).map((part, index) =>
-    words.includes(part) ? <Tag key={index}>{part}</Tag> : part,
-  );
-}
-
-function WorkspaceBuilderMockup() {
-  return (
-    <div className="workspace-builder" aria-label={autoImplementation.image.alt}>
-      <div className="workspace-decoration paper-plane" aria-hidden="true" />
-      <div className="workspace-decoration cloud" aria-hidden="true" />
-
-      <img
-        className="workspace-builder-logo"
-        src={siteConfig.logo.src}
-        alt=""
-        width={siteConfig.logo.width}
-        height={siteConfig.logo.height}
-        loading="lazy"
-        decoding="async"
-      />
-
-      <div className="workspace-builder-header">
-        <p className="workspace-builder-pill">
-          <CheckSquare size={16} aria-hidden="true" />
-          {autoImplementation.workspaceKicker}
-        </p>
-        <h3>{emphasize(autoImplementation.workspaceTitle, ["pyper"], "span")}</h3>
-        <p>
-          {emphasize(autoImplementation.workspaceSubtitle, ["pipeline", "dashboard", "automações"], "strong")}
-        </p>
-      </div>
-
-      <div className="workspace-template-grid">
-        {workspaceTemplates.map((template) => {
-          const TemplateIcon = workspaceIconMap[template.icon];
-
-          return (
-            <article className="workspace-template-card" key={template.title}>
-              <header>
-                <span className={`workspace-template-icon ${template.tone}`}>
-                  <TemplateIcon size={28} aria-hidden="true" />
-                </span>
-                <span className="workspace-template-arrow">
-                  <ArrowRight size={20} aria-hidden="true" />
-                </span>
-              </header>
-
-              <h4>{template.title}</h4>
-              <p>{template.description}</p>
-
-              <div className="workspace-template-tags">
-                {template.tags.map((tag) => (
-                  <span className={`workspace-chip ${tag.tone}`} key={tag.label}>
-                    <i aria-hidden="true" />
-                    {tag.label}
-                  </span>
-                ))}
-              </div>
-
-              <footer>
-                {template.stats.map((stat) => {
-                  const StatIcon = workspaceStatIconMap[stat.icon];
-
-                  return (
-                    <span key={`${template.title}-${stat.label}`}>
-                      <StatIcon size={17} aria-hidden="true" />
-                      <strong>{stat.value}</strong>
-                      {stat.label}
-                    </span>
-                  );
-                })}
-              </footer>
-            </article>
-          );
-        })}
-      </div>
-
-      <article className="workspace-blank-card">
-        <span className="workspace-blank-icon">
-          <Plus size={32} aria-hidden="true" />
-        </span>
-        <div>
-          <h4>{autoImplementation.blankWorkspace.title}</h4>
-          <p>{autoImplementation.blankWorkspace.description}</p>
-        </div>
-        <a href="#solucoes">
-          {autoImplementation.blankWorkspace.action}
-          <ArrowRight size={18} aria-hidden="true" />
-        </a>
-      </article>
-    </div>
-  );
-}
-
 function ProductPanel({
   children,
   icon: Icon,
@@ -731,26 +519,6 @@ function ProductPanel({
       </header>
       {children}
     </article>
-  );
-}
-
-function ServiceWorkspace() {
-  return (
-    <figure className="service-workspace">
-      <figcaption className="service-toolbar"><span><LayoutGrid size={16} aria-hidden="true" />{servicePreview.workspace}</span><span>{servicePreview.example}</span></figcaption>
-      <div className="service-layout">
-        <aside className="service-context">
-          <span className="service-avatar" aria-hidden="true">MS</span>
-          <h4>{servicePreview.contact}</h4><p>{servicePreview.company}</p>
-          <dl>{servicePreview.fields.map(field => <div key={field.label}><dt>{field.label}</dt><dd>{field.value}</dd></div>)}</dl>
-        </aside>
-        <section className="service-activity" aria-label={servicePreview.title}>
-          <h4>{servicePreview.title}</h4>
-          <ol>{servicePreview.events.map(event => <li key={event.title}><span className="service-event-dot" aria-hidden="true" /><div><strong>{event.title}</strong><p>{event.text}</p></div><time>{event.time}</time></li>)}</ol>
-        </section>
-        <aside className="service-agent"><Bot size={24} aria-hidden="true" /><h4>{servicePreview.agentTitle}</h4><p>{servicePreview.agentText}</p><span><CheckCircle2 size={16} aria-hidden="true" />{servicePreview.agentStatus}</span></aside>
-      </div>
-    </figure>
   );
 }
 

@@ -1,6 +1,5 @@
 import { describe, expect, it } from "vitest";
 import {
-  autoImplementation,
   automationFlows,
   buildWhatsAppUrl,
   faqItems,
@@ -12,7 +11,6 @@ import {
   siteConfig,
   siteMetadata,
   supportUrl,
-  workspaceTemplates,
 } from "./site";
 
 describe("Pyper landing content", () => {
@@ -54,28 +52,9 @@ describe("Pyper landing content", () => {
     ]);
   });
 
-  it("defines the auto implementation section from the approved mockup", () => {
-    expect(autoImplementation.kicker).toBe("Um ponto de partida para sua equipe");
-    expect(autoImplementation.title).toBe("Auto Implantação");
-    expect(autoImplementation.description).toContain(
-      "pipeline, dashboard e automações prontos",
-    );
-    expect(autoImplementation.workspaceTitle).toBe(
-      "Como você vai usar o pyper?",
-    );
-    expect(autoImplementation.image.src).toBe(
-      "/auto-implantacao-workspace-pyper.png",
-    );
-    expect(workspaceTemplates.map((template) => template.title)).toEqual([
-      "Vendas",
-      "Atendimento",
-      "Pós-venda",
-    ]);
-  });
-
-  it("keeps the Stitch-inspired product sections available to the page", () => {
+  it("keeps the product sections available to the page", () => {
     expect(productShowcases.map((item) => item.title)).toEqual([
-      "WhatsApp Oficial Integrado",
+      "Ferramentas do agente",
       "Funil de Vendas Inteligente",
     ]);
     expect(automationFlows.map((flow) => flow.title)).toEqual([
