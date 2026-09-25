@@ -220,8 +220,8 @@ export const capabilities = [
 export const productShowcases = [
   {
     icon: "message",
-    title: "WhatsApp Oficial Integrado",
-    text: "Conversas centralizadas, sem perda de histórico e acessíveis a toda a equipe.",
+    title: "Ferramentas do agente",
+    text: "Escolha o que a IA pode fazer durante o atendimento e veja como cada ação funciona.",
   },
   {
     icon: "kanban",
@@ -234,7 +234,7 @@ export const automationFlows = [
   {
     icon: "bot",
     title: "Configuração de Agente de IA",
-    status: "Ativo",
+    status: "Exemplo",
     steps: [
       {
         type: "Gatilho",
@@ -245,15 +245,15 @@ export const automationFlows = [
       },
       {
         type: "Ação",
-        title: "Análise por IA",
-        text: "Analisa intenção e sentimento",
+        title: "Resposta com IA",
+        text: "Gera uma resposta com as instruções configuradas",
         icon: "bot",
         tone: "blue",
       },
       {
-        type: "Decisão",
-        title: "Qualificar / Direcionar",
-        text: "Direcionar para vendas ou suporte",
+        type: "Ação",
+        title: "Adicionar tag",
+        text: "Marca o contato para acompanhamento da equipe",
         icon: "workflow",
         tone: "purple",
       },
@@ -262,26 +262,26 @@ export const automationFlows = [
   {
     icon: "workflow",
     title: "Automação de Processos de Venda",
-    status: "Pronto",
+    status: "Exemplo",
     steps: [
       {
         type: "Gatilho",
-        title: "Negócio Fechado",
-        text: "Quando o status do negócio for 'Ganho'",
+        title: "Negócio mudou de etapa",
+        text: "Quando uma oportunidade muda de estágio",
         icon: "workflow",
         tone: "green",
       },
       {
         type: "Ação",
-        title: "Criar Fatura",
-        text: "Gera PDF e envia para o cliente",
+        title: "Criar tarefa",
+        text: "Cria uma tarefa de acompanhamento para o negócio",
         icon: "kanban",
         tone: "gray",
       },
       {
         type: "Ação",
-        title: "Notificar Equipe de Sucesso",
-        text: "Alerta no Slack para onboarding",
+        title: "Notificar responsável",
+        text: "Envia uma notificação interna ao responsável",
         icon: "bell",
         tone: "cyan",
       },
@@ -401,7 +401,7 @@ export function buildJsonLdGraph() {
         applicationSubCategory: "CRM",
         operatingSystem: "Web",
         url: siteConfig.url,
-        image: `${siteConfig.url}${heroDashboard.src}`,
+        image: `${siteConfig.url}${siteConfig.logo.schemaSrc}`,
         description: siteMetadata.description,
         publisher: { "@id": `${siteConfig.url}/#organization` },
         offers: {
@@ -440,16 +440,16 @@ export const landingCopy = {
   navigation: [
     { href: "#ia-mcp", label: "IA e MCP" },
     { href: "#solucoes", label: "Soluções" },
-    { href: "#auto-implantacao", label: "Auto Implantação" },
+    { href: "#auto-implantacao", label: "Configuração" },
     { href: "#faq", label: "Perguntas frequentes" },
   ],
   demoNote: "Conheça a Pyper em uma demonstração com nossa equipe.",
   previewTitle: "Sua operação comercial",
-  previewLabel: "Visão do produto",
+  previewLabel: "Exemplo com dados fictícios",
   journeyLabel: "Do primeiro contato ao fechamento",
   journey: ["Organize sua operação", "Conecte agentes via MCP", "Acompanhe cada venda"],
   productSelectorLabel: "Explore os recursos da Pyper",
-  productViews: ["Atendimento no WhatsApp", "Funil de vendas", "Agentes e automações"],
+  productViews: ["Ferramentas do agente", "Funil de vendas", "Automações"],
 } as const;
 
 /**
@@ -460,7 +460,7 @@ export const sectionCopy = {
   nav: {
     aiMcp: "IA e MCP",
     solutions: "Soluções",
-    autoImplementation: "Auto Implantação",
+    autoImplementation: "Configuração",
     faq: "FAQ",
     support: "Suporte",
     login: "Login",
@@ -480,27 +480,30 @@ export const sectionCopy = {
   },
   prospect: {
     kicker: "Prospect Inteligente",
-    title: "Encontre seu cliente ideal em segundos com IA",
+    title: "Avalie os resultados antes de criar leads",
     description:
-      "Defina sua persona ideal e deixe nossa IA vasculhar o mercado. Chega de listas frias compradas no escuro. Gere leads qualificados que realmente precisam da sua solução.",
+      "Na prospecção, revise as empresas encontradas, a classificação e o motivo da aderência. Filtre os resultados e adicione ao CRM os contatos que fazem sentido para sua operação.",
     features: [
-      "Filtros geográficos e de faturamento precisos.",
-      "Matching semântico baseado em intenção de compra.",
-      "Importação direta para seu funil de vendas.",
+      "Busca por empresa, setor ou cidade.",
+      "Classificação, justificativa e score de relevância.",
+      "Criação de lead com indicação de contatos já cadastrados.",
     ],
-    windowTitle: "Gerador de Leads IA",
+    windowTitle: "Resultados da prospecção",
+    searchLabel: "Buscar empresa, setor ou cidade...",
+    demoNotice: "Dados fictícios. A busca e a inclusão abaixo acontecem somente neste exemplo.",
+    emptyLabel: "Nenhuma empresa encontrada neste exemplo.",
     searches: [
       "Construtoras de médio porte em São Paulo",
       "Clínicas odontológicas no Rio de Janeiro",
       "Agências de marketing em Belo Horizonte",
     ],
     leads: [
-      { id: "vanguard", name: "Vanguard Engenharia Ltda", sub: "Construção Civil • São Paulo, SP", match: "98% Match" },
-      { id: "estrutura", name: "Estrutura Forte S.A.", sub: "Infraestrutura • Campinas, SP", match: "92% Match" },
-      { id: "marmoraria", name: "Marmoraria & Construções", sub: "Acabamentos • São Paulo, SP", match: "85% Match" },
+      { id: "vanguard", name: "Empresa exemplo A", sub: "Construção Civil • São Paulo, SP", match: "Alta aderência", reason: "Atua no setor e na cidade definidos para a persona." },
+      { id: "estrutura", name: "Empresa exemplo B", sub: "Infraestrutura • Campinas, SP", match: "Média", reason: "Setor relacionado; localização fora da cidade priorizada." },
+      { id: "marmoraria", name: "Empresa exemplo C", sub: "Acabamentos • São Paulo, SP", match: "Baixa", reason: "Localização compatível, mas atividade diferente da persona." },
     ],
-    addLabel: "Adicionar CRM",
-    addedLabel: "Adicionado",
+    addLabel: "Adicionar ao CRM",
+    addedLabel: "Virou lead no exemplo",
   },
   capabilitiesTitle: "Funcionalidades da Pyper",
   trust: {
@@ -535,13 +538,13 @@ export const aiMcp = {
   cta: "Ver a IA em uma demonstração",
   demoTitle: "Agente Pyper + MCP",
   demoLabel: "Exemplo ilustrativo",
-  request: "Encontre o negócio da Mariana e mova para a etapa Proposta.",
+  request: "Quero um orçamento de 10 unidades para minha empresa.",
   steps: [
-    { title: "Consulta o contexto", text: "Localiza o lead e o negócio no CRM." },
-    { title: "Identifica a etapa", text: "Consulta as etapas disponíveis no funil." },
-    { title: "Executa a ação autorizada", text: "Move o negócio usando a ferramenta conectada." },
+    { title: "Consulta o contexto", text: "Busca o contato e consulta o catálogo disponível." },
+    { title: "Reúne os dados do negócio", text: "Identifica produto, quantidade, contato e etapa do funil." },
+    { title: "Executa a ação autorizada", text: "Abre o negócio com os dados coletados, se a ferramenta estiver habilitada." },
   ],
-  result: "O negócio da Mariana foi movido para Proposta.",
+  result: "Resultado esperado: oportunidade registrada no funil para a equipe acompanhar.",
   control: "Ações conforme as permissões e ferramentas habilitadas para o agente.",
 } as const;
 
@@ -564,4 +567,44 @@ export const servicePreview = {
   agentTitle: "Agente de IA",
   agentText: "Atendimento conectado ao contexto do cliente e às ferramentas do CRM.",
   agentStatus: "Ferramentas via MCP",
+} as const;
+
+/** Fields and stage names from the platform's pipeline components; sample data only. */
+export const pipelineExample = {
+  title: "Funil de vendas · Vendas B2B",
+  disclaimer: "Demonstração local com dados fictícios. Campos baseados na plataforma.",
+  stages: ["Prospecção", "Primeiro Contato", "Proposta Enviada", "Negociação", "Fechado Ganho", "Fechado Perdido"],
+  deals: [
+    { id: "demo-1", title: "Licenças para equipe comercial", contact: "Contato A", company: "Empresa exemplo A", value: "R$ 2.400,00", nextAction: "Ligação · confirmar quantidade de usuários", stage: "Prospecção" },
+    { id: "demo-2", title: "Implantação do CRM", contact: "Contato B", company: "Empresa exemplo B", value: "R$ 4.800,00", nextAction: "Reunião · revisar a proposta", stage: "Proposta Enviada" },
+    { id: "demo-3", title: "Ampliação de licenças", contact: "Contato C", company: "Empresa exemplo C", value: "R$ 1.200,00", nextAction: "Tarefa · confirmar condições", stage: "Negociação" },
+  ],
+  reset: "Reiniciar exemplo", resetFeedback: "Exemplo reiniciado.", empty: "Sem negócios",
+  detailsTitle: "Negócio selecionado", valueLabel: "Valor do negócio", nextLabel: "Próxima atividade",
+  moveLabel: "Mover para a etapa", hint: "Selecione um negócio e altere sua etapa. Os totais do quadro acompanham a mudança.",
+  compactHint: "Quadro demonstrativo. Explore as ações na seção Soluções.", localNotice: "Alteração somente neste exemplo.",
+} as const;
+
+export const agentToolsExample = {
+  title: "O que o agente pode fazer", enabledLabel: "ligadas",
+  disclaimer: "Demonstração dos controles de ferramentas do agente.",
+  instruction: "Ligue uma ferramenta e veja um exemplo de uso. No produto, o agente decide quando usá-la durante a conversa.",
+  testLabel: "Ver exemplo", localNotice: "Simulação local: nenhuma IA ou cadastro real foi acionado.",
+  disabledResult: "Ferramenta desligada. O agente não pode executar essa ação.",
+  tools: [
+    { name: "Procurar leads", description: "Procura pelo nome, e-mail ou empresa para reconhecer quem já entrou em contato.", example: "Cliente: Já falei com vocês semana passada.", result: "Consulta os leads para localizar o cadastro e recuperar o contexto disponível." },
+    { name: "Abrir negócio", description: "Cria uma oportunidade no funil quando há interesse de compra.", example: "Cliente: Quero um orçamento de 10 unidades.", result: "Com os dados necessários, registra um negócio com título, valor, contato e etapa escolhida." },
+    { name: "Passar para um atendente", description: "Transfere a conversa para uma pessoa da equipe.", example: "Cliente: Quero falar com alguém.", result: "Encaminha a conversa para atendimento humano com o motivo da transferência." },
+  ],
+} as const;
+
+export const setupExample = {
+  kicker: "Configure do seu jeito",
+  title: "Configure a operação da sua empresa",
+  description: "Organize seu funil, defina as ferramentas do agente e teste o atendimento antes de usá-lo com clientes.",
+  steps: [
+    { title: "Defina as etapas do funil", text: "Configure os estágios que representam seu processo comercial." },
+    { title: "Habilite as ferramentas da IA", text: "Escolha o que o agente pode consultar ou alterar no CRM." },
+    { title: "Teste com um caso do seu atendimento", text: "Confira a resposta do agente e ajuste as instruções da operação." },
+  ],
 } as const;

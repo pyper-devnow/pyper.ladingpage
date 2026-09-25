@@ -12,7 +12,8 @@ import {
   painPoints,
   productShowcases,
   sectionCopy,
-  workspaceTemplates,
+  setupExample,
+  agentToolsExample,
 } from "./site";
 
 export interface ContentFieldDef {
@@ -59,7 +60,7 @@ export const CONTENT_FIELD_GROUPS: ContentFieldGroup[] = [
     fields: [
       { key: "sectionCopy.nav.aiMcp", label: "Link para IA e MCP" },
       { key: "sectionCopy.nav.solutions", label: "Link para Soluções" },
-      { key: "sectionCopy.nav.autoImplementation", label: "Link para Auto Implantação" },
+      { key: "sectionCopy.nav.autoImplementation", label: "Link para Configuração" },
       { key: "sectionCopy.nav.faq", label: "Link para Perguntas frequentes" },
       { key: "sectionCopy.nav.support", label: "Link para o Suporte" },
       { key: "sectionCopy.nav.login", label: "Link para entrar na plataforma" },
@@ -90,28 +91,28 @@ export const CONTENT_FIELD_GROUPS: ContentFieldGroup[] = [
   },
   {
     id: "auto-implantacao",
-    title: "Seção Auto Implantação",
+    title: "Configuração da operação",
     fields: [
-      { key: "autoImplementation.kicker", label: "Frase pequena acima do título" },
-      { key: "autoImplementation.title", label: "Título" },
-      { key: "autoImplementation.description", label: "Texto", multiline: true },
-      { key: "autoImplementation.workspaceKicker", label: "Quadro: etiqueta" },
-      { key: "autoImplementation.workspaceTitle", label: "Quadro: título" },
-      { key: "autoImplementation.workspaceSubtitle", label: "Quadro: texto", multiline: true },
-      ...range(workspaceTemplates).flatMap((i) => [
-        { key: `workspaceTemplates.${i}.title`, label: `Modelo ${i + 1}: nome` },
-        {
-          key: `workspaceTemplates.${i}.description`,
-          label: `Modelo ${i + 1}: descrição`,
-          multiline: true,
-        },
+      { key: "setupExample.kicker", label: "Frase acima do título" },
+      { key: "setupExample.title", label: "Título" },
+      { key: "setupExample.description", label: "Descrição", multiline: true },
+      ...range(setupExample.steps).flatMap((i) => [
+        { key: `setupExample.steps.${i}.title`, label: `Passo ${i + 1}: título` },
+        { key: `setupExample.steps.${i}.text`, label: `Passo ${i + 1}: texto`, multiline: true },
       ]),
-      { key: "autoImplementation.blankWorkspace.title", label: "Opção em branco: nome" },
-      {
-        key: "autoImplementation.blankWorkspace.description",
-        label: "Opção em branco: descrição",
-      },
-      { key: "autoImplementation.blankWorkspace.action", label: "Opção em branco: botão" },
+    ],
+  },
+  {
+    id: "ferramentas-exemplo",
+    title: "Exemplos das ferramentas de IA",
+    fields: [
+      { key: "agentToolsExample.title", label: "Título" },
+      { key: "agentToolsExample.instruction", label: "Instrução", multiline: true },
+      ...range(agentToolsExample.tools).flatMap((i) => [
+        { key: `agentToolsExample.tools.${i}.description`, label: `Ferramenta ${i + 1}: descrição`, multiline: true },
+        { key: `agentToolsExample.tools.${i}.example`, label: `Ferramenta ${i + 1}: situação`, multiline: true },
+        { key: `agentToolsExample.tools.${i}.result`, label: `Ferramenta ${i + 1}: resultado`, multiline: true },
+      ]),
     ],
   },
   {
@@ -224,8 +225,6 @@ export const CONTENT_FIELD_GROUPS: ContentFieldGroup[] = [
     title: "Imagens (texto alternativo)",
     description: "Descrição das imagens para o Google e para quem usa leitor de tela.",
     fields: [
-      { key: "heroDashboard.alt", label: "Imagem do produto no topo" },
-      { key: "autoImplementation.image.alt", label: "Quadro da Auto Implantação" },
       { key: "siteConfig.logo.alt", label: "Logo" },
     ],
   },
